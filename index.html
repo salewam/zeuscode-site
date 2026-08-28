@@ -50,6 +50,7 @@
   <div class="blob blob--1"></div>
   <div class="blob blob--2"></div>
   <div class="blob blob--3"></div>
+  <canvas id="bgGlobe"></canvas>
 </div>
 <!-- ============ HEADER ============ -->
 <header class="header" id="header">
@@ -84,35 +85,25 @@
       <b>41 модель</b> — Claude, GPT, Gemini, DeepSeek, Grok, GLM
     </div>
     <h1 class="reveal" data-d="1">
-      <span class="line">Лучший агрегатор</span>
-      <span class="line grad-text">нейросетей для кодинга</span>
-      <span class="line">в СНГ</span>
+      <span class="line">Один ключ</span>
+      <span class="line grad-text">ко всем ИИ для кода</span>
+      <span class="line">Дешевле, чем у всех</span>
     </h1>
     <p class="hero__sub reveal" data-d="2">
-      Один API вместо десятка интеграций. ZeusCode сам выбирает модель под задачу,
-      сжимает контекст, экономит токены и подхватывает запрос, если провайдер упал.
-      Оплата в рублях, без VPN и зарубежных карт.
+      Пишете код в своём редакторе — ZeusCode сам выбирает нейросеть под задачу.
+      Без VPN и зарубежных карт. Платите рублями и на 17–45% меньше, чем у аналогов.
     </p>
     <div class="hero__actions reveal" data-d="3">
       <a href="#start" class="btn btn--primary btn--lg">Получить API-ключ<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      <a href="#how" class="btn btn--ghost btn--lg">Посмотреть, как работает</a>
+      <a href="#how" class="btn btn--ghost btn--lg">Как это работает</a>
     </div>
-    <p class="hero__note reveal" data-d="4">Бесплатный старт · Без подписки · Платите только за токены</p>
-
-    <!-- orbit -->
-    <div class="orbit reveal" data-d="2" aria-hidden="true">
-      <div class="orbit__ring"></div>
-      <div class="orbit__ring orbit__ring--2"></div>
-      <div class="orbit__spin" id="orbit1"></div>
-      <div class="orbit__spin orbit__spin--2" id="orbit2"></div>
-      <div class="orbit__core"><svg><use href="#i-bolt"/></svg></div>
-    </div>
+    <p class="hero__note reveal" data-d="4">Старт бесплатно · Без подписки · Платите только за токены</p>
 
     <div class="hero__stats reveal">
-      <div class="stat"><div class="stat__num grad-text" data-count="41" data-suffix="">0</div><div class="stat__label">моделей в каталоге</div></div>
+      <div class="stat"><div class="stat__num grad-text" data-count="41" data-suffix="">0</div><div class="stat__label">моделей в одном ключе</div></div>
       <div class="stat"><div class="stat__num grad-text" data-count="60" data-suffix="%">0</div><div class="stat__label">экономия на токенах</div></div>
       <div class="stat"><div class="stat__num grad-text" data-count="45" data-suffix="%">0</div><div class="stat__label">дешевле конкурентов</div></div>
-      <div class="stat"><div class="stat__num grad-text" data-count="99" data-suffix=",9%">0</div><div class="stat__label">аптайм с fallback</div></div>
+      <div class="stat"><div class="stat__num grad-text" data-count="99" data-suffix=",9%">0</div><div class="stat__label">запросов доходит</div></div>
     </div>
   </div>
 </section>
@@ -121,9 +112,9 @@
   <div class="wrap">
     <div class="section-head center reveal">
       <p class="eyebrow">Все провайдеры в одном ключе</p>
-      <h2>Топовые модели мира — <span class="grad-text">через один endpoint</span></h2>
-      <p class="lead">Anthropic, OpenAI, Google, DeepSeek, xAI, Z.ai, Alibaba, Moonshot.
-        Переключение модели — это одна строка в запросе, а не новая интеграция.</p>
+      <h2>41 нейросеть — <span class="grad-text">один адрес</span></h2>
+      <p class="lead">Claude, GPT, Gemini, DeepSeek, Grok, GLM, Qwen, Kimi.
+        Сменить модель — это одна строка в запросе, а не новая регистрация и новая карта.</p>
     </div>
   </div>
   <div class="marquee reveal" data-d="1">
@@ -139,30 +130,30 @@
   <div class="wrap">
     <div class="section-head reveal">
       <p class="eyebrow">Зачем это нужно</p>
-      <h2>Кодить с LLM в СНГ <span class="gold-text">дорого и больно</span></h2>
-      <p class="lead">Разные API, карты, VPN, лимиты, падения провайдеров и счёт, который растёт быстрее проекта. ZeusCode убирает всё это.</p>
+      <h2>Кодить с нейросетями в СНГ <span class="gold-text">дорого и больно</span></h2>
+      <p class="lead">Десять сервисов, десять оплат, VPN, падения и счёт, который растёт быстрее проекта. ZeusCode убирает всё это.</p>
     </div>
     <div class="split">
       <div class="panel panel--pain reveal" data-d="1">
         <h3>Без ZeusCode</h3>
         <ul>
-          <li><i>✕</i><span>Отдельная интеграция и биллинг под каждого провайдера</span></li>
-          <li><i>✕</i><span>Зарубежная карта, VPN, блокировки по региону</span></li>
-          <li><i>✕</i><span>Провайдер отдал 429/500 — запрос и контекст потеряны</span></li>
-          <li><i>✕</i><span>Длинный диалог упирается в контекстное окно и падает</span></li>
-          <li><i>✕</i><span>Одна и та же дорогая модель тащит и рефакторинг, и «поправь опечатку»</span></li>
-          <li><i>✕</i><span>Непонятно, куда ушли деньги: нет единой аналитики</span></li>
+          <li><i>✕</i><span>Свой ключ и своя оплата у каждой нейросети</span></li>
+          <li><i>✕</i><span>Нужны VPN и зарубежная карта</span></li>
+          <li><i>✕</i><span>Сервис упал — запрос потерян</span></li>
+          <li><i>✕</i><span>Длинный чат ломается на лимите</span></li>
+          <li><i>✕</i><span>Дорогая модель тратится на ерунду</span></li>
+          <li><i>✕</i><span>Непонятно, куда ушли деньги</span></li>
         </ul>
       </div>
       <div class="panel panel--gain reveal" data-d="2">
         <h3>С ZeusCode</h3>
         <ul>
-          <li><i>✓</i><span>Один OpenAI-совместимый API ко всем 41 модели</span></li>
-          <li><i>✓</i><span>Оплата в рублях: карта РФ, СБП, крипта</span></li>
-          <li><i>✓</i><span>Авто-retry и fallback на совместимую модель — запрос доходит</span></li>
-          <li><i>✓</i><span>Сжатие истории и headroom: контекст не переполняется</span></li>
-          <li><i>✓</i><span>Routing отправляет задачу в модель, которая ей подходит по цене и качеству</span></li>
-          <li><i>✓</i><span>Единый кабинет: расход, лимиты, модели, эффект оптимизации</span></li>
+          <li><i>✓</i><span>Один ключ на все 41 модель</span></li>
+          <li><i>✓</i><span>Оплата рублями: карта, СБП, крипта</span></li>
+          <li><i>✓</i><span>Упал — сами повторим на другой</span></li>
+          <li><i>✓</i><span>Сжимаем историю, лимит не мешает</span></li>
+          <li><i>✓</i><span>Простое — дешёвой, сложное — топовой</span></li>
+          <li><i>✓</i><span>Виден каждый рубль в кабинете</span></li>
         </ul>
       </div>
     </div>
@@ -173,54 +164,54 @@
   <div class="wrap">
     <div class="section-head reveal">
       <p class="eyebrow">Возможности</p>
-      <h2>Не просто прокси, а <span class="grad-text">слой оптимизации</span></h2>
-      <p class="lead">ZeusCode стоит между вашим кодом и моделями: маршрутизирует, сжимает, страхует и считает деньги.</p>
+      <h2>Не просто доступ, а <span class="grad-text">умный слой сверху</span></h2>
+      <p class="lead">ZeusCode стоит между вашим кодом и нейросетями: выбирает, сжимает, страхует и считает деньги.</p>
     </div>
     <div class="grid grid--3">
       <article class="card reveal" data-d="1">
         <div class="card__icon"><svg><use href="#i-route"/></svg></div>
-        <h3>Умный routing</h3>
-        <p>Запрос уходит в модель, которая лучше подходит под тип задачи, доступность и вашу политику. Для сложных кейсов — reasoning-routing.</p>
+        <h3>Сам выбирает модель</h3>
+        <p>Простая задача уходит дешёвой модели, сложная — топовой. Вы просто пишете код.</p>
       </article>
       <article class="card reveal" data-d="2">
         <div class="card__icon"><svg><use href="#i-coin"/></svg></div>
-        <h3>Экономия токенов</h3>
-        <p>Дедупликация сообщений, срезание раздутых tool outputs, компактное представление контекста. Меньше входных токенов — дешевле каждый turn.</p>
+        <h3>Экономия до 60% токенов</h3>
+        <p>Убираем из запроса мусор и повторы. Меньше токенов — меньше счёт.</p>
       </article>
       <article class="card reveal" data-d="3">
         <div class="card__icon"><svg><use href="#i-layers"/></svg></div>
-        <h3>Комбо-стратегии</h3>
-        <p>Pipeline, fusion и panel: одна модель разбирает задачу, вторая пишет код, третья проверяет. Последовательно или параллельно.</p>
+        <h3>Команда моделей</h3>
+        <p>Одна думает, вторая пишет код, третья проверяет. Как команда разработчиков.</p>
       </article>
       <article class="card reveal" data-d="1">
         <div class="card__icon"><svg><use href="#i-refresh"/></svg></div>
-        <h3>Fallback и retry</h3>
-        <p>4xx, 5xx, timeout или отказ провайдера обрабатываются автоматически. Если основная модель недоступна — выполнение продолжается на совместимой.</p>
+        <h3>Не падает</h3>
+        <p>Если нейросеть недоступна, запрос сам уходит на другую. Вы даже не заметите.</p>
       </article>
       <article class="card reveal" data-d="2">
         <div class="card__icon"><svg><use href="#i-gauge"/></svg></div>
-        <h3>Контекст без переполнений</h3>
-        <p>Эффективное сжатие истории у границы окна и зарезервированный headroom, чтобы модели хватило места на полноценный ответ.</p>
+        <h3>Длинные чаты</h3>
+        <p>У лимита сжимаем историю, а важное оставляем. Диалог не обрывается.</p>
       </article>
       <article class="card reveal" data-d="3">
         <div class="card__icon"><svg><use href="#i-lock"/></svg></div>
-        <h3>Маскирование данных</h3>
-        <p>Чувствительные фрагменты скрываются перед отправкой провайдеру и восстанавливаются в ответе. Ключи и секреты не улетают наружу.</p>
+        <h3>Секреты не утекают</h3>
+        <p>Ключи и пароли скрываются до отправки и возвращаются в ответе.</p>
       </article>
       <article class="card reveal" data-d="1">
         <div class="card__icon"><svg><use href="#i-chart"/></svg></div>
-        <h3>Usage accounting</h3>
-        <p>Видно фактическое потребление, расход по моделям и эффект оптимизации в рублях — а не абстрактные «кредиты».</p>
+        <h3>Понятный счёт</h3>
+        <p>Видно расход в рублях по каждой модели. Никаких абстрактных «кредитов».</p>
       </article>
       <article class="card reveal" data-d="2">
         <div class="card__icon"><svg><use href="#i-shield"/></svg></div>
-        <h3>Стабильность качества</h3>
-        <p>При сжатии сохраняются ключевые инструкции и факты, шум убирается. Ответы не деградируют на длинных сессиях.</p>
+        <h3>Качество не падает</h3>
+        <p>Важное сохраняем, лишнее убираем. Ответы не тупеют к концу сессии.</p>
       </article>
       <article class="card reveal" data-d="3">
         <div class="card__icon"><svg><use href="#i-term"/></svg></div>
         <h3>Работает в вашем IDE</h3>
-        <p>OpenAI-совместимый формат: Claude Code, Cursor, Cline, Continue, Aider, Zed. Меняете base_url и ключ — и всё.</p>
+        <p>Claude Code, Cursor, Cline, Aider, Zed. Меняете одну строку — и всё.</p>
       </article>
     </div>
   </div>
@@ -236,17 +227,17 @@
       <div class="step reveal" data-d="1">
         <div class="step__n">1</div>
         <h3>Получите ключ</h3>
-        <p>Регистрация через Telegram, ключ выдаётся сразу. Стартовый баланс — на тесты, карта не нужна.</p>
+        <p>Вход через Telegram, ключ выдаётся сразу. Стартовый баланс на тесты — карта не нужна.</p>
       </div>
       <div class="step reveal" data-d="2">
         <div class="step__n">2</div>
-        <h3>Подмените base_url</h3>
-        <p>В любом SDK или IDE указываете endpoint ZeusCode. Код менять не нужно — формат OpenAI-совместимый.</p>
+        <h3>Впишите адрес</h3>
+        <p>В своём редакторе или SDK меняете одну строку — адрес ZeusCode. Остальной код тот же.</p>
       </div>
       <div class="step reveal" data-d="3">
         <div class="step__n">3</div>
         <h3>Кодьте</h3>
-        <p>Указываете модель явно или ставите <code>auto</code> — и routing сам решает, кому отдать задачу.</p>
+        <p>Ставите <code>auto</code> — и мы сами решаем, какой нейросети отдать задачу. Или выбираете вручную.</p>
       </div>
     </div>
 
@@ -286,24 +277,24 @@ r = client.chat.completions.<span class="tok-f">create</span>(
   <div class="wrap">
     <div class="section-head reveal">
       <p class="eyebrow">ZeusCode Crew</p>
-      <h2>Бригада из трёх моделей <span class="grad-text">вместо одной дорогой</span></h2>
-      <p class="lead">Готовая стратегия для кодинга: сильная модель думает над архитектурой, быстрая пишет код, дешёвая полирует результат. Один полный запрос — около 147&nbsp;₽ вместо 400+&nbsp;₽ на чистом Opus.</p>
+      <h2>Три модели работают <span class="grad-text">как одна команда</span></h2>
+      <p class="lead">Умная думает, быстрая пишет код, дешёвая проверяет. Полный запрос выходит ~147&nbsp;₽ вместо 400+&nbsp;₽, если гонять всё через самую дорогую модель.</p>
     </div>
     <div class="crew">
       <div class="crew__card reveal" data-d="1">
-        <div class="crew__role">Architect</div>
+        <div class="crew__role">Архитектор</div>
         <div class="crew__model"><svg><use href="#i-claude"/></svg>claude-opus-4-6</div>
-        <p>Разбирает задачу, читает контекст проекта, проектирует решение и ставит ТЗ остальным. Включается только там, где реально нужен топ-уровень.</p>
+        <p>Разбирает задачу и придумывает решение. Включается только там, где нужна голова, а не руки.</p>
       </div>
       <div class="crew__card reveal" data-d="2">
-        <div class="crew__role">Builder</div>
+        <div class="crew__role">Кодер</div>
         <div class="crew__model"><svg><use href="#i-openai"/></svg>gpt-5.4</div>
-        <p>Пишет код по плану архитектора. Быстро, дешевле в 3 раза по input и с хорошим следованием инструкциям.</p>
+        <p>Пишет код по плану. Быстро и в 3 раза дешевле, чем если бы писал архитектор.</p>
       </div>
       <div class="crew__card reveal" data-d="3">
-        <div class="crew__role">Finalizer</div>
+        <div class="crew__role">Проверяющий</div>
         <div class="crew__model"><svg><use href="#i-claude"/></svg>claude-haiku-4-5</div>
-        <p>Вычитывает diff, ловит мелочи, приводит стиль к конвенциям проекта. Стоит копейки — 141&nbsp;₽ за миллион входных токенов.</p>
+        <p>Вычитывает код, ловит мелочи, приводит стиль к вашему. Стоит копейки — 141&nbsp;₽ за миллион токенов.</p>
       </div>
     </div>
   </div>
@@ -314,14 +305,14 @@ r = client.chat.completions.<span class="tok-f">create</span>(
   <div class="wrap">
     <div class="section-head reveal">
       <p class="eyebrow">Цены</p>
-      <h2>Платите за токены, <span class="grad-text">а не за подписку</span></h2>
-      <p class="lead">Никаких месячных платежей и сгорающих кредитов. Пополняете баланс в рублях и тратите столько, сколько реально используете. Цены — за 1&nbsp;млн токенов.</p>
+      <h2>Платите за то, <span class="grad-text">что реально потратили</span></h2>
+      <p class="lead">Без подписки и сгорающих кредитов. Пополнили баланс в рублях — тратите по факту. Цены ниже — за 1&nbsp;млн токенов.</p>
     </div>
     <div class="tiers">
       <div class="tier reveal" data-d="1">
         <div class="tier__name">Economy</div>
-        <div class="tier__price">от 30 ₽<span> / 1M input</span></div>
-        <p class="tier__desc">Массовые запросы, черновики, простые правки и автотесты.</p>
+        <div class="tier__price">от 30 ₽<span> / 1M токенов</span></div>
+        <p class="tier__desc">Мелкие правки, черновики, автотесты.</p>
         <ul class="tier__models">
           <li><svg><use href="#i-gemini"/></svg>gemini-2.5-flash <b>30 ₽</b></li>
           <li><svg><use href="#i-deepseek"/></svg>deepseek-v4-pro <b>143 ₽</b></li>
@@ -331,8 +322,8 @@ r = client.chat.completions.<span class="tok-f">create</span>(
       </div>
       <div class="tier tier--hot reveal" data-d="2">
         <div class="tier__name">Standard</div>
-        <div class="tier__price">от 141 ₽<span> / 1M input</span></div>
-        <p class="tier__desc">Основной ежедневный кодинг, рефакторинг, code review.</p>
+        <div class="tier__price">от 141 ₽<span> / 1M токенов</span></div>
+        <p class="tier__desc">Обычный ежедневный кодинг и рефакторинг.</p>
         <ul class="tier__models">
           <li><svg><use href="#i-claude"/></svg>claude-haiku-4-5 <b>141 ₽</b></li>
           <li><svg><use href="#i-openai"/></svg>gpt-5.4-mini <b>192 ₽</b></li>
@@ -342,8 +333,8 @@ r = client.chat.completions.<span class="tok-f">create</span>(
       </div>
       <div class="tier reveal" data-d="3">
         <div class="tier__name">Premium</div>
-        <div class="tier__price">от 337 ₽<span> / 1M input</span></div>
-        <p class="tier__desc">Сложная архитектура, критичный код, финальная верификация.</p>
+        <div class="tier__price">от 337 ₽<span> / 1M токенов</span></div>
+        <p class="tier__desc">Сложная архитектура и критичный код.</p>
         <ul class="tier__models">
           <li><svg><use href="#i-claude"/></svg>claude-sonnet-5 <b>337 ₽</b></li>
           <li><svg><use href="#i-gemini"/></svg>gemini-3-pro <b>696 ₽</b></li>
@@ -353,8 +344,8 @@ r = client.chat.completions.<span class="tok-f">create</span>(
       </div>
       <div class="tier reveal" data-d="4">
         <div class="tier__name">Ultra</div>
-        <div class="tier__price">от 841 ₽<span> / 1M input</span></div>
-        <p class="tier__desc">Задачи, где качество output важнее любой цены.</p>
+        <div class="tier__price">от 841 ₽<span> / 1M токенов</span></div>
+        <p class="tier__desc">Когда качество важнее цены.</p>
         <ul class="tier__models">
           <li><svg><use href="#i-openai"/></svg>gpt-5.6-terra <b>841 ₽</b></li>
           <li><svg><use href="#i-grok"/></svg>grok-4.5 <b>888 ₽</b></li>
@@ -363,7 +354,7 @@ r = client.chat.completions.<span class="tok-f">create</span>(
         </ul>
       </div>
     </div>
-    <p class="table-note reveal">Указана цена входных токенов. Полный прайс со стоимостью output — в кабинете. Курс фиксируется на момент пополнения.</p>
+    <p class="table-note reveal">Указана цена входящих токенов. Полный прайс — в кабинете. Курс фиксируется в момент пополнения.</p>
   </div>
 </section>
 <!-- ============ COMPARE ============ -->
@@ -371,8 +362,8 @@ r = client.chat.completions.<span class="tok-f">create</span>(
   <div class="wrap">
     <div class="section-head reveal">
       <p class="eyebrow">Сравнение</p>
-      <h2>Дешевле, чем <span class="grad-text">самый дешёвый агрегатор РФ</span></h2>
-      <p class="lead">Сравнили себя с polza.ai на одинаковых моделях. На тех, где кодят каждый день, разница доходит до 45%.</p>
+      <h2>Дешевле, чем <span class="grad-text">самый дешёвый в РФ</span></h2>
+      <p class="lead">Взяли одинаковые модели и сравнили цены с polza.ai. На тех, которыми кодят каждый день, разница до 45%.</p>
     </div>
     <div class="table-wrap reveal" data-d="1">
       <table>
@@ -407,7 +398,7 @@ r = client.chat.completions.<span class="tok-f">create</span>(
         </tbody>
       </table>
     </div>
-    <p class="table-note reveal">И это до оптимизации контекста. С включённым сжатием реальный счёт падает ещё на 30–60% — потому что вы просто отправляете меньше токенов.</p>
+    <p class="table-note reveal">И это без учёта сжатия контекста. С ним счёт падает ещё на 30–60% — вы просто отправляете меньше токенов.</p>
   </div>
 </section>
 
@@ -440,35 +431,35 @@ r = client.chat.completions.<span class="tok-f">create</span>(
     <div class="faq" id="faqList">
       <div class="faq__item reveal">
         <button class="faq__q"><span>Нужен ли VPN и зарубежная карта?</span><i>+</i></button>
-        <div class="faq__a"><p>Нет. Endpoint доступен из СНГ напрямую, пополнение — картой РФ, СБП или криптой. Все запросы к провайдерам уходят с нашей стороны.</p></div>
+        <div class="faq__a"><p>Нет. Мы доступны из СНГ напрямую, оплата — картой РФ, СБП или криптой. К нейросетям ходим мы, а не вы.</p></div>
       </div>
       <div class="faq__item reveal">
-        <button class="faq__q"><span>Придётся переписывать код под ваш API?</span><i>+</i></button>
-        <div class="faq__a"><p>Нет. Формат OpenAI-совместимый: меняете <code>base_url</code> и <code>api_key</code>, остальное работает как раньше. Расширенные функции (routing, crew, сжатие) включаются через необязательный <code>extra_body</code>.</p></div>
+        <button class="faq__q"><span>Надо переписывать код?</span><i>+</i></button>
+        <div class="faq__a"><p>Нет. Мы работаем в формате OpenAI: меняете адрес и ключ — остальное как было. Умные функции включаются одним параметром, если захотите.</p></div>
       </div>
       <div class="faq__item reveal">
-        <button class="faq__q"><span>Как именно вы экономите токены?</span><i>+</i></button>
-        <div class="faq__a"><p>Перед отправкой контекст оптимизируется: убираются дубли сообщений и повторяющиеся инструкции, срезаются раздутые tool outputs и служебные части, история переводится в более компактное представление. При приближении к лимиту окна включается сжатие с сохранением ключевых фактов. В usage видно, сколько токенов сэкономлено.</p></div>
+        <button class="faq__q"><span>Как вы экономите токены?</span><i>+</i></button>
+        <div class="faq__a"><p>Перед отправкой чистим запрос: убираем повторы, дубли сообщений и раздутые технические блоки. У лимита сжимаем историю, оставляя главное. Сколько сэкономили — видно в кабинете.</p></div>
       </div>
       <div class="faq__item reveal">
-        <button class="faq__q"><span>А качество ответов не падает от сжатия?</span><i>+</i></button>
-        <div class="faq__a"><p>Важные инструкции и факты сохраняются, убирается шум. Плюс резервируется headroom, чтобы модели хватило места на полный ответ. На практике на длинных сессиях качество выше, чем без оптимизации, — там диалог просто упирается в лимит окна.</p></div>
+        <button class="faq__q"><span>Качество не упадёт от сжатия?</span><i>+</i></button>
+        <div class="faq__a"><p>Важное остаётся, убирается только шум. Плюс мы всегда оставляем модели место на полный ответ. На долгих сессиях получается лучше, чем без нас — там диалог просто упирается в лимит.</p></div>
       </div>
       <div class="faq__item reveal">
-        <button class="faq__q"><span>Что будет, если провайдер упал?</span><i>+</i></button>
-        <div class="faq__a"><p>Запрос повторяется автоматически, а при недоступности модели выполнение продолжается на совместимой из вашего fallback-списка. Вы не теряете ни запрос, ни контекст и не пишете retry-логику руками.</p></div>
+        <button class="faq__q"><span>Что если нейросеть упала?</span><i>+</i></button>
+        <div class="faq__a"><p>Повторяем запрос сами, а если модель недоступна — уходим на другую из вашего списка. Запрос и переписка не теряются, retry писать не нужно.</p></div>
       </div>
       <div class="faq__item reveal">
-        <button class="faq__q"><span>Есть подписка или минимальный платёж?</span><i>+</i></button>
-        <div class="faq__a"><p>Нет. Только баланс: пополнили — тратите по факту потребления. Ничего не сгорает, неиспользованные деньги остаются вашими.</p></div>
+        <button class="faq__q"><span>Есть подписка?</span><i>+</i></button>
+        <div class="faq__a"><p>Нет. Только баланс: пополнили — тратите по факту. Деньги не сгорают.</p></div>
       </div>
       <div class="faq__item reveal">
-        <button class="faq__q"><span>Вы храните мой код и переписку?</span><i>+</i></button>
-        <div class="faq__a"><p>Содержимое запросов не используется для обучения. Чувствительные фрагменты можно маскировать до отправки провайдеру — они подменяются на плейсхолдеры и восстанавливаются в ответе.</p></div>
+        <button class="faq__q"><span>Вы храните мой код?</span><i>+</i></button>
+        <div class="faq__a"><p>На обучении ваши запросы не используются. Секреты можно маскировать: они подменяются заглушками до отправки и возвращаются в ответе.</p></div>
       </div>
       <div class="faq__item reveal">
-        <button class="faq__q"><span>Подходит для команды?</span><i>+</i></button>
-        <div class="faq__a"><p>Да. Несколько ключей на один баланс, лимиты по ключу, разделение расходов по проектам и общая аналитика в кабинете.</p></div>
+        <button class="faq__q"><span>Подойдёт команде?</span><i>+</i></button>
+        <div class="faq__a"><p>Да. Несколько ключей на один баланс, лимиты по каждому и расходы по проектам в кабинете.</p></div>
       </div>
     </div>
   </div>
@@ -480,7 +471,7 @@ r = client.chat.completions.<span class="tok-f">create</span>(
     <div class="cta reveal">
       <p class="eyebrow" style="justify-content:center">Начать</p>
       <h2>Один ключ. <span class="grad-text">Все модели.</span> Рубли.</h2>
-      <p class="lead center">Регистрация занимает минуту, стартовый баланс — сразу. Проверьте на своём проекте, сколько вы переплачивали.</p>
+      <p class="lead center">Ключ выдаётся за минуту, стартовый баланс сразу. Проверьте на своём проекте, сколько вы переплачивали.</p>
       <div class="cta__actions">
         <a href="https://t.me/neptuneapp_bot" class="btn btn--primary btn--lg"><svg width="18" height="18"><use href="#i-tg"/></svg>Получить ключ в Telegram</a>
         <a href="#pricing" class="btn btn--ghost btn--lg">Посмотреть прайс</a>
@@ -497,7 +488,7 @@ r = client.chat.completions.<span class="tok-f">create</span>(
         <a href="#top" class="logo">
           <span class="logo__mark"><svg><use href="#i-bolt"/></svg></span>Zeus<span class="grad-text">Code</span>
         </a>
-        <p class="footer__about">Агрегатор нейросетей для кодинга. Один API, 41 модель, routing и оптимизация контекста. Оплата в рублях.</p>
+        <p class="footer__about">Один ключ ко всем нейросетям для кода. 41 модель, умный выбор модели и экономия токенов. Оплата в рублях.</p>
       </div>
       <div>
         <h4>Продукт</h4>
@@ -534,5 +525,6 @@ r = client.chat.completions.<span class="tok-f">create</span>(
 </footer>
 
 <script src="js/app.js"></script>
+<script type="module" src="js/globe.js"></script>
 </body>
 </html>

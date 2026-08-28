@@ -39,30 +39,6 @@
   fillTrack(document.getElementById("track1"), MODELS.slice(0, 10));
   fillTrack(document.getElementById("track2"), MODELS.slice(10));
 
-  /* ---------- hero orbit ---------- */
-  function buildOrbit(el, list, offset) {
-    if (!el) return;
-    list.forEach(function (m, idx) {
-      var a = (idx / list.length) * 2 * Math.PI - Math.PI / 2 + offset;
-      var node = document.createElement("div");
-      node.className = "orbit__node";
-      node.style.left = (50 + Math.cos(a) * 50) + "%";
-      node.style.top = (50 + Math.sin(a) * 50) + "%";
-      node.innerHTML = '<svg><use href="#' + m.i + '"/></svg>';
-      node.title = m.n || "";
-      el.appendChild(node);
-    });
-  }
-
-  buildOrbit(document.getElementById("orbit1"), [
-    { i: "i-claude", n: "Claude" }, { i: "i-openai", n: "GPT" },
-    { i: "i-gemini", n: "Gemini" }, { i: "i-deepseek", n: "DeepSeek" },
-    { i: "i-grok", n: "Grok" }, { i: "i-glm", n: "GLM" }
-  ], 0);
-  buildOrbit(document.getElementById("orbit2"), [
-    { i: "i-qwen", n: "Qwen" }, { i: "i-kimi", n: "Kimi" },
-    { i: "i-openai", n: "Codex" }, { i: "i-claude", n: "Haiku" }
-  ], 0.6);
   /* ---------- sticky header ---------- */
   var header = document.getElementById("header");
   function onScroll() {
