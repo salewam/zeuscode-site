@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ZeusCode · 2 — Marble Docs</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="dev.css">
+<style>
+:root {
+  --ui: "Inter", -apple-system, sans-serif;
+  --code: "JetBrains Mono", ui-monospace, monospace;
+  --display: "Inter", sans-serif;
+  --display-w: 800; --display-ls: -0.032em;
+
+  --bg: #f6f4ef;            /* пентелийский мрамор */
+  --bg-header: rgba(246,244,239,0.85);
+  --panel: #ffffff; --panel-bar: #f2efe8;
+  --panel-shadow: 0 24px 50px -34px rgba(25,23,20,0.34);
+  --fg: #191714; --fg-2: #56514a; --fg-3: #857e73;
+  --line: rgba(25,23,20,0.11); --line-strong: rgba(25,23,20,0.2);
+
+  --acc: #a4741f; --acc-hi: #8a5f14; --acc-fg: #fffdf7;
+  --acc-text: #8a5f14; --acc-line: rgba(164,116,31,0.4);
+  --acc-edge: inset 0 -1px 0 rgba(0,0,0,0.14);
+  --sec-bg: #fffefb;
+
+  --code-fg: #24211d; --code-c: #8f887c; --code-k: #7c4bab; --code-s: #2f6f43; --code-f: #a4741f;
+  --radius: 6px; --radius-lg: 10px;
+}
+.logo__mark { background: #191714; color: #f0cf87; border-radius: 6px; }
+.logo em { font-style: normal; color: var(--acc-text); }
+.grid-fx {
+  position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background-image: linear-gradient(rgba(25,23,20,0.028) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(25,23,20,0.028) 1px, transparent 1px);
+  background-size: 88px 88px;
+  -webkit-mask-image: radial-gradient(ellipse 95% 80% at 50% -12%, #000 5%, transparent 78%);
+          mask-image: radial-gradient(ellipse 95% 80% at 50% -12%, #000 5%, transparent 78%);
+}
+.ide { border-color: rgba(25,23,20,0.14); }
+.ide__out b { color: var(--acc-text); }
+</style>
+</head>
+<body>
+<div class="grid-fx"></div>
+
+<header class="header">
+  <div class="wrap header__in">
+    <a class="logo"><span class="logo__mark"><svg viewBox="0 0 24 24"><path d="M13 2 4.5 13.5H11l-1 8.5 8.5-11.5H12z" fill="currentColor"/></svg></span><span class="logo__txt">Zeus<em>Code</em></span></a>
+    <nav class="nav"><a>Модели</a><a>Документация</a><a>Цены</a><a>Статус</a></nav>
+    <div class="header__right">
+      <a class="ghostlink">Войти</a>
+      <a class="btn btn--primary">Получить ключ</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap shell">
+    <div>
+      <p class="eyebrow">41 модель · один API · оплата в рублях</p>
+      <h1>Один ключ<br>ко всем <b>ИИ</b><br>для кода</h1>
+      <p class="sub">Меняете <code>base_url</code> — и работаете со всеми топовыми моделями из своего редактора. Роутинг под задачу, fallback при сбоях, сжатие контекста. Без VPN и зарубежных карт.</p>
+      <div class="actions">
+        <a class="btn btn--primary btn--lg">Получить API-ключ</a>
+        <a class="btn btn--sec btn--lg">Документация</a>
+      </div>
+      <p class="note">Совместим с OpenAI SDK · <code>curl</code>, Python, Node, Cursor, Continue</p>
+    </div>
+
+    <div class="ide">
+      <div class="ide__bar"><span class="ide__tab">main.py</span><span class="ide__badge"><i></i>routing: auto</span></div>
+<pre><span class="c"># меняется одна строка — код остаётся ваш</span>
+<span class="k">from</span> openai <span class="k">import</span> OpenAI
+
+client = OpenAI(
+    base_url=<span class="s">"https://api.zeuscode.ru/v1"</span>,
+    api_key=<span class="s">"zc-live-..."</span>,
+)
+
+r = client.chat.completions.<span class="f">create</span>(
+    model=<span class="a">"auto"</span>,
+    messages=[{<span class="s">"role"</span>: <span class="s">"user"</span>,
+                <span class="s">"content"</span>: <span class="s">"отрефактори payments.py"</span>}],
+)</pre>
+      <div class="ide__out">
+        <span>→ выбрана <b>claude-opus-4-6</b></span>
+        <span>контекст сжат <b>−58%</b></span>
+        <span>latency <b>1.4s</b></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="strip">
+  <div class="wrap">
+    <div class="stats">
+      <div class="stat"><div class="stat__n mono">41</div><div class="stat__l">модель в одном ключе</div></div>
+      <div class="stat"><div class="stat__n mono">60<i>%</i></div><div class="stat__l">экономия на токенах</div></div>
+      <div class="stat"><div class="stat__n mono">45<i>%</i></div><div class="stat__l">дешевле аналогов</div></div>
+      <div class="stat"><div class="stat__n mono">99.9<i>%</i></div><div class="stat__l">доступность с fallback</div></div>
+    </div>
+    <div class="models"><span>Claude</span><span>GPT</span><span>Gemini</span><span>DeepSeek</span><span>Grok</span><span>GLM</span><span>Qwen</span><span>Kimi</span><span>MiniMax</span><span>+32</span></div>
+  </div>
+</section>
+
+</body>
+</html>

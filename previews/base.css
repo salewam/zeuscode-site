@@ -1,0 +1,101 @@
+/* Общая структура для превью палитр. Цвета задаются в каждом варианте. */
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font-family: "Inter", -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+a { color: inherit; text-decoration: none; }
+.wrap { width: 100%; max-width: 1180px; margin: 0 auto; padding: 0 28px; }
+
+/* фон */
+.bg { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+.bg__grid {
+  position: absolute; inset: -50%;
+  background-image: linear-gradient(var(--grid) 1px, transparent 1px),
+                    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 64px 64px;
+  -webkit-mask-image: radial-gradient(ellipse 60% 55% at 50% 30%, #000 20%, transparent 75%);
+          mask-image: radial-gradient(ellipse 60% 55% at 50% 30%, #000 20%, transparent 75%);
+}
+.blob { position: absolute; border-radius: 50%; filter: blur(140px); }
+.planet {
+  position: absolute; left: 50%; top: 46%; width: 620px; height: 620px;
+  transform: translate(-50%, -50%); border-radius: 50%;
+  background: var(--planet);
+  box-shadow: var(--planet-rim);
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, transparent 30%, #000 74%);
+          mask-image: radial-gradient(circle at 50% 50%, transparent 30%, #000 74%);
+}
+.orbit {
+  position: absolute; left: 50%; top: 46%; width: 860px; height: 300px;
+  transform: translate(-50%, -50%) rotate(-18deg);
+  border: 1px dashed var(--orbit); border-radius: 50%;
+  -webkit-mask-image: radial-gradient(ellipse 46% 60% at 50% 50%, transparent 42%, #000 70%);
+          mask-image: radial-gradient(ellipse 46% 60% at 50% 50%, transparent 42%, #000 70%);
+}
+.orbit--2 { width: 760px; height: 420px; transform: translate(-50%, -50%) rotate(24deg); }
+.spark { position: absolute; width: 4px; height: 4px; border-radius: 50%; }
+
+/* хедер */
+.header { position: fixed; inset: 0 0 auto; z-index: 10; }
+.header__in { display: flex; align-items: center; gap: 32px; height: 72px; }
+.logo { display: flex; align-items: center; font-weight: 800; font-size: 19px; letter-spacing: -0.03em; }
+.logo__mark {
+  width: 32px; height: 32px; border-radius: 9px; margin-right: 10px; flex: none;
+  display: grid; place-items: center; background: var(--mark); box-shadow: var(--mark-glow);
+}
+.logo__mark svg { width: 17px; height: 17px; }
+.nav { display: flex; gap: 26px; margin-left: auto; font-size: 14.5px; color: var(--muted); }
+.head__cta { display: flex; gap: 10px; }
+
+/* кнопки */
+.btn {
+  display: inline-flex; align-items: center; gap: 9px; border: 1px solid transparent;
+  border-radius: 999px; padding: 11px 20px; font-size: 14.5px; font-weight: 600;
+  cursor: pointer; white-space: nowrap;
+}
+.btn--lg { padding: 17px 32px; font-size: 16px; }
+.btn--primary { background: var(--cta-bg); color: var(--cta-fg); box-shadow: var(--cta-shadow); border-color: var(--cta-edge); }
+.btn--ghost { background: var(--ghost-bg); color: var(--text); border-color: var(--stroke); }
+
+/* герой */
+.hero { position: relative; padding: 150px 0 70px; text-align: center; }
+.badge {
+  display: inline-flex; align-items: center; gap: 10px; padding: 7px 16px 7px 7px;
+  border: 1px solid var(--stroke); border-radius: 999px; background: var(--surface);
+  font-size: 13.5px; color: var(--muted); backdrop-filter: blur(8px);
+}
+.badge .pill {
+  padding: 3px 9px; border-radius: 999px; font-size: 11px; font-weight: 800;
+  letter-spacing: 0.06em; background: var(--pill-bg); color: var(--pill-fg);
+}
+.badge b { color: var(--text); font-weight: 600; }
+h1 {
+  margin: 26px 0 0; font-size: clamp(38px, 5.6vw, 74px); line-height: 1.03;
+  letter-spacing: -0.045em; font-weight: 800;
+}
+h1 .line { display: block; }
+.accent { background: var(--grad-text); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.sub { margin: 26px auto 0; max-width: 58ch; color: var(--muted); font-size: 19px; }
+.actions { display: flex; gap: 14px; justify-content: center; margin-top: 38px; }
+.note { margin-top: 18px; font-size: 13.5px; color: var(--dim); }
+
+/* пары проблема → решение (только для гибрида) */
+.pairs { display: flex; gap: 10px; justify-content: center; margin-top: 30px; flex-wrap: wrap; }
+.tag { display: inline-flex; align-items: center; gap: 8px; padding: 8px 15px; border-radius: 999px; font-size: 13.5px; font-weight: 600; }
+.tag--bad { background: var(--bad-bg); color: var(--bad); border: 1px solid var(--bad-edge); }
+.tag--good { background: var(--good-bg); color: var(--good); border: 1px solid var(--good-edge); }
+.tag s { opacity: 0.75; font-weight: 500; }
+
+/* статы */
+.stats {
+  margin-top: 64px; display: grid; grid-template-columns: repeat(4, 1fr);
+  border: 1px solid var(--stroke); border-radius: 24px; background: var(--surface); overflow: hidden;
+}
+.stat { padding: 26px 18px; text-align: center; border-right: 1px solid var(--stroke); }
+.stat:last-child { border-right: none; }
+.stat__n { font-size: 34px; font-weight: 800; letter-spacing: -0.03em; }
+.stat__l { font-size: 13px; color: var(--dim); }
+.mono { font-variant-numeric: tabular-nums; }

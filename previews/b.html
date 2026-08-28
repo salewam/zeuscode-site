@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ZeusCode — вариант B: Black-figure</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="base.css">
+<style>
+:root {
+  /* B — Black-figure: чёрный лак + терракота + кремовый, как античная вазопись */
+  --bg: #0b0a09;
+  --text: #e8d9b5;
+  --muted: #a2937a;
+  --dim: #756a58;
+  --stroke: rgba(232,217,181,0.13);
+  --surface: rgba(232,217,181,0.04);
+  --grid: rgba(232,217,181,0.025);
+
+  --terra: #d4581f;
+  --terra-soft: #e08b4c;
+  --gold: #c9962c;
+  --ink: #0b0a09;
+
+  --mark: linear-gradient(180deg, #e08b4c 0%, #d4581f 55%, #9c3a11 100%);
+  --mark-glow: 0 6px 22px -6px rgba(212,88,31,0.8);
+  --grad-text: linear-gradient(100deg, #e08b4c 0%, #d4581f 55%, #c9962c 100%);
+
+  --cta-bg: linear-gradient(180deg, #e08b4c 0%, #d4581f 55%, #a83f13 100%);
+  --cta-fg: #fdf6e6;
+  --cta-edge: rgba(224,139,76,0.5);
+  --cta-shadow: 0 14px 36px -12px rgba(212,88,31,0.62);
+  --ghost-bg: rgba(232,217,181,0.045);
+
+  --pill-bg: rgba(201,150,44,0.18);
+  --pill-fg: #d9ab48;
+
+  --planet: radial-gradient(circle at 36% 32%, rgba(212,88,31,0.14), rgba(70,38,18,0.20) 45%, rgba(11,10,9,0) 72%);
+  --planet-rim: inset 0 0 90px -10px rgba(212,88,31,0.22);
+  --orbit: rgba(232,217,181,0.15);
+}
+.blob--1 { width: 560px; height: 560px; background: #6b2a0e; opacity: 0.40; top: -190px; left: -140px; }
+.blob--2 { width: 420px; height: 420px; background: #6d5518; opacity: 0.30; top: 200px; right: -160px; }
+.stat__n { color: var(--terra-soft); }
+.stat__n.gold { color: #d9ab48; }
+/* античный разделитель: тонкая двойная линия с ромбом */
+.meander {
+  position: relative; height: 1px; margin: 36px auto 0; max-width: 360px;
+  background: linear-gradient(90deg, transparent, var(--terra), transparent); opacity: 0.65;
+}
+.meander::before {
+  content: ""; position: absolute; left: 50%; top: -4px; width: 9px; height: 9px;
+  transform: translateX(-50%) rotate(45deg); background: var(--terra);
+}
+.meander::after {
+  content: ""; position: absolute; left: 0; right: 0; top: 5px; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201,150,44,0.6), transparent);
+}
+h1 { letter-spacing: -0.04em; }
+.badge { letter-spacing: 0.01em; }
+</style>
+</head>
+<body>
+
+<div class="bg">
+  <div class="bg__grid"></div>
+  <div class="blob blob--1"></div>
+  <div class="blob blob--2"></div>
+  <div class="planet"></div>
+  <div class="orbit"></div>
+  <div class="orbit orbit--2"></div>
+  <div class="spark" style="left:31%;top:26%;background:#f1e2bd;box-shadow:0 0 12px 3px rgba(232,217,181,.8)"></div>
+  <div class="spark" style="left:69%;top:63%;background:#d4581f;box-shadow:0 0 12px 3px rgba(212,88,31,.9)"></div>
+  <div class="spark" style="left:22%;top:71%;background:#c9962c;box-shadow:0 0 10px 2px rgba(201,150,44,.8)"></div>
+  <div class="spark" style="left:78%;top:22%;background:#e08b4c;box-shadow:0 0 10px 2px rgba(224,139,76,.8)"></div>
+</div>
+
+<header class="header">
+  <div class="wrap header__in">
+    <a class="logo" href="#">
+      <span class="logo__mark"><svg viewBox="0 0 24 24"><path d="M13 2 4.5 13.5H11l-1 8.5 8.5-11.5H12z" fill="#fdf6e6"/></svg></span>
+      Zeus<span style="background:var(--grad-text);-webkit-background-clip:text;background-clip:text;color:transparent">Code</span>
+    </a>
+    <nav class="nav"><a>Модели</a><a>Возможности</a><a>Как работает</a><a>Цены</a><a>FAQ</a></nav>
+    <div class="head__cta">
+      <a class="btn btn--ghost">Тарифы</a>
+      <a class="btn btn--primary">Начать бесплатно</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="badge"><span class="pill">NEW</span><b>41 модель</b> — Claude, GPT, Gemini, DeepSeek, Grok, GLM</div>
+    <h1>
+      <span class="line">Один ключ</span>
+      <span class="line accent">ко всем ИИ для кода</span>
+      <span class="line">Дешевле, чем у всех</span>
+    </h1>
+    <div class="meander"></div>
+    <p class="sub">Пишете код в своём редакторе — ZeusCode сам выбирает нейросеть под задачу. Без VPN и зарубежных карт. Платите рублями и на 17–45% меньше, чем у аналогов.</p>
+    <div class="actions">
+      <a class="btn btn--primary btn--lg">Получить API-ключ →</a>
+      <a class="btn btn--ghost btn--lg">Как это работает</a>
+    </div>
+    <p class="note">Старт бесплатно · Без подписки · Платите только за токены</p>
+
+    <div class="stats">
+      <div class="stat"><div class="stat__n mono">41</div><div class="stat__l">модель в одном ключе</div></div>
+      <div class="stat"><div class="stat__n mono gold">60%</div><div class="stat__l">экономия на токенах</div></div>
+      <div class="stat"><div class="stat__n mono gold">45%</div><div class="stat__l">дешевле аналогов</div></div>
+      <div class="stat"><div class="stat__n mono">99.9%</div><div class="stat__l">доступность с fallback</div></div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

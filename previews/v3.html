@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ZeusCode · 3 — Storm Slate</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="dev.css">
+<style>
+:root {
+  --ui: "Inter", -apple-system, sans-serif;
+  --code: "JetBrains Mono", ui-monospace, monospace;
+  --display: "Inter", sans-serif;
+  --display-w: 800; --display-ls: -0.034em;
+
+  --bg: #0d1117;            /* грозовой сланец, холодная база */
+  --bg-header: rgba(13,17,23,0.82);
+  --panel: #11161d; --panel-bar: #161c24;
+  --panel-shadow: 0 30px 70px -45px #000;
+  --fg: #e6edf3; --fg-2: #9aa7b4; --fg-3: #6b7784;
+  --line: rgba(230,237,243,0.09); --line-strong: rgba(230,237,243,0.17);
+
+  --acc: #7dd3fc; --acc-hi: #a8e4ff; --acc-fg: #06131c;
+  --acc-text: #8fd8fd; --acc-line: rgba(125,211,252,0.34);
+  --acc-edge: inset 0 1px 0 rgba(255,255,255,0.3);
+  --sec-bg: transparent;
+
+  --code-fg: #c9d1d9; --code-c: #6b7784; --code-k: #ff7b72; --code-s: #a5d6ff; --code-f: #d2a8ff;
+  --radius: 6px; --radius-lg: 8px;
+}
+.logo__mark { border: 1px solid var(--acc-line); border-radius: 6px; color: var(--acc-text); }
+.logo em { font-style: normal; color: var(--acc-text); }
+.grid-fx {
+  position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(ellipse 70% 45% at 50% -8%, rgba(125,211,252,0.10), transparent 68%),
+    linear-gradient(180deg, #10161e 0%, var(--bg) 46%);
+}
+.grid-fx::after {
+  content: ""; position: absolute; inset: 0;
+  background-image: linear-gradient(rgba(230,237,243,0.028) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(230,237,243,0.028) 1px, transparent 1px);
+  background-size: 92px 92px;
+  -webkit-mask-image: radial-gradient(ellipse 65% 55% at 50% 6%, #000 5%, transparent 72%);
+          mask-image: radial-gradient(ellipse 65% 55% at 50% 6%, #000 5%, transparent 72%);
+}
+.stat__n i { color: var(--acc-text); }
+</style>
+</head>
+<body>
+<div class="grid-fx"></div>
+
+<header class="header">
+  <div class="wrap header__in">
+    <a class="logo"><span class="logo__mark"><svg viewBox="0 0 24 24"><path d="M13 2 4.5 13.5H11l-1 8.5 8.5-11.5H12z" fill="currentColor"/></svg></span><span class="logo__txt">Zeus<em>Code</em></span></a>
+    <nav class="nav"><a>Модели</a><a>Документация</a><a>Цены</a><a>Статус</a></nav>
+    <div class="header__right">
+      <a class="ghostlink">Войти</a>
+      <a class="btn btn--primary">Получить ключ</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap shell">
+    <div>
+      <p class="eyebrow">41 модель · один API · оплата в рублях</p>
+      <h1>Один ключ<br>ко всем <b>ИИ</b><br>для кода</h1>
+      <p class="sub">Меняете <code>base_url</code> — и работаете со всеми топовыми моделями из своего редактора. Роутинг под задачу, fallback при сбоях, сжатие контекста. Без VPN и зарубежных карт.</p>
+      <div class="actions">
+        <a class="btn btn--primary btn--lg">Получить API-ключ</a>
+        <a class="btn btn--sec btn--lg">Документация</a>
+      </div>
+      <p class="note">Совместим с OpenAI SDK · <code>curl</code>, Python, Node, Cursor, Continue</p>
+    </div>
+
+    <div class="ide">
+      <div class="ide__bar"><span class="ide__tab">main.py</span><span class="ide__badge"><i></i>routing: auto</span></div>
+<pre><span class="c"># меняется одна строка — код остаётся ваш</span>
+<span class="k">from</span> openai <span class="k">import</span> OpenAI
+
+client = OpenAI(
+    base_url=<span class="s">"https://api.zeuscode.ru/v1"</span>,
+    api_key=<span class="s">"zc-live-..."</span>,
+)
+
+r = client.chat.completions.<span class="f">create</span>(
+    model=<span class="a">"auto"</span>,
+    messages=[{<span class="s">"role"</span>: <span class="s">"user"</span>,
+                <span class="s">"content"</span>: <span class="s">"отрефактори payments.py"</span>}],
+)</pre>
+      <div class="ide__out">
+        <span>→ выбрана <b>claude-opus-4-6</b></span>
+        <span>контекст сжат <b>−58%</b></span>
+        <span>latency <b>1.4s</b></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="strip">
+  <div class="wrap">
+    <div class="stats">
+      <div class="stat"><div class="stat__n mono">41</div><div class="stat__l">модель в одном ключе</div></div>
+      <div class="stat"><div class="stat__n mono">60<i>%</i></div><div class="stat__l">экономия на токенах</div></div>
+      <div class="stat"><div class="stat__n mono">45<i>%</i></div><div class="stat__l">дешевле аналогов</div></div>
+      <div class="stat"><div class="stat__n mono">99.9<i>%</i></div><div class="stat__l">доступность с fallback</div></div>
+    </div>
+    <div class="models"><span>Claude</span><span>GPT</span><span>Gemini</span><span>DeepSeek</span><span>Grok</span><span>GLM</span><span>Qwen</span><span>Kimi</span><span>MiniMax</span><span>+32</span></div>
+  </div>
+</section>
+
+</body>
+</html>

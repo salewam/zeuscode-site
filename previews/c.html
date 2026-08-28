@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ZeusCode — вариант C: гибрид (гроза + золото + терракота)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="base.css">
+<style>
+:root {
+  /* C — гибрид: база A, терракота = проблема, золото = решение */
+  --bg: #08090f;
+  --text: #f2efe8;
+  --muted: #9b9a94;
+  --dim: #6a6a67;
+  --stroke: rgba(242,239,232,0.10);
+  --surface: rgba(242,239,232,0.035);
+  --grid: rgba(242,239,232,0.022);
+
+  --bolt: #8fd4ff;
+  --gold: #f5c451;
+  --ink: #0d0d10;
+
+  --mark: linear-gradient(180deg, #ffe9a8 0%, #f5c451 40%, #c9962c 100%);
+  --mark-glow: 0 6px 22px -6px rgba(245,196,81,0.75);
+  --grad-text: linear-gradient(100deg, #f5c451 0%, #ffe9a8 45%, #8fd4ff 100%);
+
+  --cta-bg: linear-gradient(180deg, #ffe9a8 0%, #f5c451 42%, #cf9c2e 100%);
+  --cta-fg: #0d0d10;
+  --cta-edge: rgba(255,233,168,0.55);
+  --cta-shadow: 0 14px 36px -12px rgba(245,196,81,0.6);
+  --ghost-bg: rgba(242,239,232,0.05);
+
+  --pill-bg: rgba(212,88,31,0.20);
+  --pill-fg: #e08b4c;
+
+  /* семантика нарратива */
+  --bad: #e08b4c; --bad-bg: rgba(212,88,31,0.12); --bad-edge: rgba(212,88,31,0.30);
+  --good: #f5c451; --good-bg: rgba(245,196,81,0.10); --good-edge: rgba(245,196,81,0.28);
+
+  --planet: radial-gradient(circle at 36% 32%, rgba(143,212,255,0.18), rgba(30,44,70,0.28) 45%, rgba(8,9,15,0) 72%);
+  --planet-rim: inset 0 0 90px -10px rgba(143,212,255,0.26);
+  --orbit: rgba(143,212,255,0.14);
+}
+.blob--1 { width: 560px; height: 560px; background: #2a3f6b; opacity: 0.42; top: -190px; left: -140px; }
+.blob--2 { width: 440px; height: 440px; background: #7a3a12; opacity: 0.26; top: 210px; right: -170px; }
+.stat__n { color: var(--bolt); }
+.stat__n.gold { color: var(--gold); }
+</style>
+</head>
+<body>
+
+<div class="bg">
+  <div class="bg__grid"></div>
+  <div class="blob blob--1"></div>
+  <div class="blob blob--2"></div>
+  <div class="planet"></div>
+  <div class="orbit"></div>
+  <div class="orbit orbit--2"></div>
+  <div class="spark" style="left:31%;top:26%;background:#eaf6ff;box-shadow:0 0 12px 3px rgba(143,212,255,.9)"></div>
+  <div class="spark" style="left:69%;top:63%;background:#f5c451;box-shadow:0 0 12px 3px rgba(245,196,81,.85)"></div>
+  <div class="spark" style="left:22%;top:71%;background:#e08b4c;box-shadow:0 0 10px 2px rgba(212,88,31,.7)"></div>
+  <div class="spark" style="left:78%;top:22%;background:#8fd4ff;box-shadow:0 0 10px 2px rgba(143,212,255,.8)"></div>
+</div>
+
+<header class="header">
+  <div class="wrap header__in">
+    <a class="logo" href="#">
+      <span class="logo__mark"><svg viewBox="0 0 24 24"><path d="M13 2 4.5 13.5H11l-1 8.5 8.5-11.5H12z" fill="#0d0d10"/></svg></span>
+      Zeus<span style="background:var(--grad-text);-webkit-background-clip:text;background-clip:text;color:transparent">Code</span>
+    </a>
+    <nav class="nav"><a>Модели</a><a>Возможности</a><a>Как работает</a><a>Цены</a><a>FAQ</a></nav>
+    <div class="head__cta">
+      <a class="btn btn--ghost">Тарифы</a>
+      <a class="btn btn--primary">Начать бесплатно</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="badge"><span class="pill">БОЛЬНО</span><b>10 сервисов, 10 оплат, VPN</b> — и счёт растёт быстрее проекта</div>
+    <h1>
+      <span class="line">Один ключ</span>
+      <span class="line accent">ко всем ИИ для кода</span>
+      <span class="line">Дешевле, чем у всех</span>
+    </h1>
+    <p class="sub">Пишете код в своём редакторе — ZeusCode сам выбирает нейросеть под задачу. Без VPN и зарубежных карт. Платите рублями и на 17–45% меньше, чем у аналогов.</p>
+
+    <div class="pairs">
+      <span class="tag tag--bad">✕ <s>Ключ на каждый сервис</s></span>
+      <span class="tag tag--good">✓ Один ключ на 41 модель</span>
+      <span class="tag tag--bad">✕ <s>VPN и карта иностранного банка</s></span>
+      <span class="tag tag--good">✓ Рубли: карта, СБП, крипта</span>
+    </div>
+
+    <div class="actions">
+      <a class="btn btn--primary btn--lg">Получить API-ключ →</a>
+      <a class="btn btn--ghost btn--lg">Как это работает</a>
+    </div>
+    <p class="note">Старт бесплатно · Без подписки · Платите только за токены</p>
+
+    <div class="stats">
+      <div class="stat"><div class="stat__n mono">41</div><div class="stat__l">модель в одном ключе</div></div>
+      <div class="stat"><div class="stat__n mono gold">60%</div><div class="stat__l">экономия на токенах</div></div>
+      <div class="stat"><div class="stat__n mono gold">45%</div><div class="stat__l">дешевле аналогов</div></div>
+      <div class="stat"><div class="stat__n mono">99.9%</div><div class="stat__l">доступность с fallback</div></div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

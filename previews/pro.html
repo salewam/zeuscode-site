@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ZeusCode — Olympus</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+/* ================== Olympus: одна температура, один акцент ================== */
+:root {
+  /* тёплый графит — та же температура, что у золота */
+  --bg: #0c0b0a;
+  --bg-lift: #141210;
+  --marble: #f0ece3;
+  --muted: #a49d91;
+  --dim: #6e685f;
+  --hair: rgba(240,236,227,0.10);
+  --hair-soft: rgba(240,236,227,0.055);
+
+  --gold: #d9a94a;
+  --gold-hi: #f0cf87;
+  --gold-deep: #a97c25;
+  --ink: #14120e;
+
+  --maxw: 1120px;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--marble);
+  font-family: "Inter", -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+.wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 28px; }
+
+/* ---------- фон: один источник света сверху + тонкая сетка ---------- */
+.bg { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+.bg__light {
+  position: absolute; left: 50%; top: -30%; width: 1200px; height: 900px;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse at 50% 0%, rgba(217,169,74,0.10), rgba(217,169,74,0.03) 42%, transparent 68%);
+}
+.bg__grid {
+  position: absolute; inset: 0;
+  background-image: linear-gradient(var(--hair-soft) 1px, transparent 1px),
+                    linear-gradient(90deg, var(--hair-soft) 1px, transparent 1px);
+  background-size: 96px 96px;
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 18%, #000 10%, transparent 72%);
+          mask-image: radial-gradient(ellipse 70% 60% at 50% 18%, #000 10%, transparent 72%);
+}
+/* геометрия вместо размытых пятен: тонкие орбиты */
+.arc {
+  position: absolute; left: 50%; top: 42%; transform: translate(-50%,-50%) rotate(-14deg);
+  border: 1px solid rgba(217,169,74,0.13); border-radius: 50%;
+}
+.arc--1 { width: 1080px; height: 1080px; }
+.arc--2 { width: 780px; height: 780px; border-color: rgba(240,236,227,0.055); }
+.arc--3 { width: 1400px; height: 1400px; border-color: rgba(217,169,74,0.07); }
+.dot { position: absolute; width: 3px; height: 3px; border-radius: 50%; background: var(--gold-hi); }
+
+/* ---------- хедер ---------- */
+.header { position: fixed; inset: 0 0 auto; z-index: 10; border-bottom: 1px solid transparent; }
+.header__in { display: flex; align-items: center; gap: 34px; height: 76px; }
+.logo { display: flex; align-items: center; gap: 11px; font-size: 19px; letter-spacing: 0.01em; }
+.logo__mark {
+  width: 30px; height: 30px; flex: none; display: grid; place-items: center;
+  border: 1px solid rgba(217,169,74,0.55); border-radius: 50%; color: var(--gold);
+}
+.logo__mark svg { width: 14px; height: 14px; }
+.logo b { font-family: "Cormorant Garamond", Georgia, serif; font-weight: 700; font-size: 23px; letter-spacing: 0.02em; }
+.logo span { color: var(--gold); }
+.nav { display: flex; gap: 26px; margin-left: auto; font-size: 14px; color: var(--muted); letter-spacing: 0.01em; }
+.nav a:hover { color: var(--marble); }
+.head__cta { display: flex; align-items: center; gap: 18px; }
+</style>
+<style id="s2">
+/* ---------- кнопки: плоское золото, тёмная гравировка ---------- */
+.link { font-size: 14px; color: var(--muted); }
+.link:hover { color: var(--marble); }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 1px solid transparent; border-radius: 4px;
+  padding: 11px 20px; font-size: 14px; font-weight: 600; letter-spacing: 0.01em;
+  cursor: pointer; white-space: nowrap; transition: 0.2s ease;
+}
+.btn--lg { padding: 16px 34px; font-size: 15.5px; }
+.btn--gold {
+  background: var(--gold); color: var(--ink);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.35);
+}
+.btn--gold:hover { background: var(--gold-hi); }
+.btn--line { color: var(--marble); border-color: var(--hair); background: transparent; }
+.btn--line:hover { border-color: rgba(217,169,74,0.55); color: var(--gold-hi); }
+
+/* ---------- герой ---------- */
+.hero { padding: 150px 0 90px; text-align: center; }
+.eyebrow {
+  margin: 0; font-size: 11.5px; font-weight: 500; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--gold); opacity: 0.9;
+}
+h1 {
+  margin: 26px 0 0;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-weight: 600; font-size: clamp(44px, 5.6vw, 78px); line-height: 1.04;
+  letter-spacing: -0.005em; color: var(--marble);
+}
+h1 em { font-style: italic; font-weight: 600; color: var(--gold); }
+.sub {
+  margin: 28px auto 0; max-width: 56ch; color: var(--muted);
+  font-size: 17px; line-height: 1.7;
+}
+.actions { display: flex; gap: 12px; justify-content: center; margin-top: 34px; }
+.note { margin-top: 18px; font-size: 12.5px; color: var(--dim); letter-spacing: 0.01em; }
+
+/* ---------- разделитель-хайрлайн с ромбом ---------- */
+.rule { position: relative; height: 1px; margin: 76px auto 0; max-width: 620px; background: var(--hair); }
+.rule::after {
+  content: ""; position: absolute; left: 50%; top: -3.5px; width: 7px; height: 7px;
+  transform: translateX(-50%) rotate(45deg); background: var(--gold); opacity: 0.8;
+}
+
+/* ---------- статы: моно-цифры, без цветного конфетти ---------- */
+.stats { margin-top: 54px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; }
+.stat { padding: 6px 14px; border-left: 1px solid var(--hair-soft); }
+.stat:first-child { border-left: none; }
+.stat__n {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-weight: 500; font-size: 30px; letter-spacing: -0.02em; color: var(--marble);
+}
+.stat__n i { font-style: normal; color: var(--gold); }
+.stat__l { margin-top: 6px; font-size: 12px; color: var(--dim); letter-spacing: 0.02em; }
+
+/* ---------- модели: моно-строка вместо цветных чипов ---------- */
+.models {
+  margin-top: 34px; display: flex; flex-wrap: wrap; justify-content: center;
+  gap: 10px 18px; font-family: "JetBrains Mono", monospace; font-size: 11.5px;
+  color: var(--dim); letter-spacing: 0.08em; text-transform: uppercase;
+}
+.models span { position: relative; }
+.models span + span::before { content: "·"; position: absolute; left: -12px; color: rgba(240,236,227,0.16); }
+
+/* ---------- окно кода: инженерия внутри, миф снаружи ---------- */
+.ide {
+  margin: 36px auto 0; max-width: 640px; text-align: left;
+  background: var(--bg-lift); border: 1px solid var(--hair); border-radius: 6px;
+  overflow: hidden; box-shadow: 0 40px 90px -50px rgba(0,0,0,0.9);
+}
+.ide__bar {
+  display: flex; align-items: center; gap: 8px; padding: 11px 14px;
+  border-bottom: 1px solid var(--hair-soft);
+  font-family: "JetBrains Mono", monospace; font-size: 11px; color: var(--dim);
+}
+.ide__bar i { width: 7px; height: 7px; border-radius: 50%; background: rgba(240,236,227,0.14); }
+.ide__bar span { margin-left: auto; letter-spacing: 0.06em; }
+.ide pre {
+  margin: 0; padding: 18px 20px 20px;
+  font-family: "JetBrains Mono", monospace; font-size: 12.5px; line-height: 1.85;
+  color: #cfc9bd; overflow-x: auto;
+}
+.c { color: #6e685f; }
+.k { color: #b9a9d8; }
+.s { color: #9fb98d; }
+.g { color: var(--gold); }
+</style>
+</head>
+<body>
+<div class="bg">
+  <div class="bg__light"></div>
+  <div class="bg__grid"></div>
+  <div class="arc arc--1"></div>
+  <div class="arc arc--2"></div>
+  <div class="arc arc--3"></div>
+  <div class="dot" style="left:22%;top:30%"></div>
+  <div class="dot" style="left:79%;top:37%"></div>
+  <div class="dot" style="left:35%;top:74%;background:rgba(240,236,227,.55)"></div>
+  <div class="dot" style="left:64%;top:16%;background:rgba(240,236,227,.45)"></div>
+</div>
+
+<header class="header">
+  <div class="wrap header__in">
+    <a class="logo" href="#">
+      <span class="logo__mark"><svg viewBox="0 0 24 24"><path d="M13 2 4.5 13.5H11l-1 8.5 8.5-11.5H12z" fill="currentColor"/></svg></span>
+      <b>Zeus<span>Code</span></b>
+    </a>
+    <nav class="nav"><a>Модели</a><a>Возможности</a><a>Как работает</a><a>Цены</a><a>FAQ</a></nav>
+    <div class="head__cta">
+      <a class="link">Войти</a>
+      <a class="btn btn--gold">Получить ключ</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Агрегатор нейросетей для кодинга · СНГ</p>
+    <h1>
+      Один ключ<br>
+      ко всем <em>ИИ</em> для кода
+    </h1>
+    <p class="sub">
+      Пишете код в своём редакторе — ZeusCode сам выбирает модель под задачу.
+      Без VPN и зарубежных карт. Платите рублями и на 17–45% меньше, чем у аналогов.
+    </p>
+    <div class="actions">
+      <a class="btn btn--gold btn--lg">Получить API-ключ</a>
+      <a class="btn btn--line btn--lg">Как это работает</a>
+    </div>
+    <p class="note">Старт бесплатно · Без подписки · Платите только за токены</p>
+
+    <div class="ide">
+      <div class="ide__bar"><i></i><i></i><i></i> main.py <span>ZeusCode · routing: auto</span></div>
+<pre><span class="c"># меняется только base_url — код остаётся ваш</span>
+<span class="k">from</span> openai <span class="k">import</span> OpenAI
+
+client = OpenAI(
+    base_url=<span class="s">"https://api.zeuscode.ru/v1"</span>,
+    api_key=<span class="s">"zc-..."</span>,
+)
+r = client.chat.completions.create(
+    model=<span class="g">"auto"</span>,   <span class="c"># Zeus сам выберет модель под задачу</span>
+    messages=[{<span class="s">"role"</span>: <span class="s">"user"</span>, <span class="s">"content"</span>: <span class="s">"отрефактори этот модуль"</span>}],
+)</pre>
+    </div>
+
+    <div class="models">
+      <span>Claude</span><span>GPT</span><span>Gemini</span><span>DeepSeek</span><span>Grok</span><span>GLM</span><span>Qwen</span><span>Kimi</span><span>+33</span>
+    </div>
+
+    <div class="rule"></div>
+
+    <div class="stats">
+      <div class="stat"><div class="stat__n">41</div><div class="stat__l">модель в одном ключе</div></div>
+      <div class="stat"><div class="stat__n">60<i>%</i></div><div class="stat__l">экономия на токенах</div></div>
+      <div class="stat"><div class="stat__n">45<i>%</i></div><div class="stat__l">дешевле аналогов</div></div>
+      <div class="stat"><div class="stat__n">99.9<i>%</i></div><div class="stat__l">доступность с fallback</div></div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
