@@ -51,6 +51,18 @@ body {
 img, svg { display: block; max-width: 100%; }
 a { color: inherit; text-decoration: none; }
 button { font: inherit; cursor: pointer; }
+
+/* ================== a11y ================== */
+:focus-visible { outline: 2px solid var(--bolt); outline-offset: 3px; border-radius: 3px; }
+.skip {
+  position: fixed; top: 10px; left: 50%; z-index: 200;
+  transform: translate(-50%, -160%);
+  padding: 10px 18px; border-radius: var(--r-sm);
+  background: var(--bolt); color: var(--ink); font-size: 14px; font-weight: 600;
+  transition: transform 0.2s var(--ease);
+}
+.skip:focus { transform: translate(-50%, 0); }
+[id] { scroll-margin-top: 84px; }
 /* ================== layout helpers ================== */
 .wrap { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
 .section { position: relative; padding: 110px 0; }
@@ -135,8 +147,12 @@ p { margin: 0; }
 }
 .logo__mark svg { width: 15px; height: 15px; }
 .nav { display: flex; gap: 26px; margin-left: auto; font-size: 13.5px; color: var(--muted); }
-.nav a { transition: color 0.2s; }
+.nav a { position: relative; transition: color 0.2s; }
 .nav a:hover { color: var(--text); }
+.nav a.is-active { color: var(--text); }
+.nav a.is-active::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -7px; height: 1px; background: var(--bolt);
+}
 .header__cta { display: flex; gap: 10px; align-items: center; }
 .burger { display: none; }
 /* ================== hero ================== */
@@ -252,6 +268,15 @@ p { margin: 0; }
 .codewin__dot { width: 8px; height: 8px; border-radius: 50%; background: var(--surface-2); }
 .codewin__dot:first-child { background: var(--bolt-line); }
 .codewin__title { margin-left: 10px; font-size: 12px; color: var(--dim); font-family: var(--code); }
+.codewin__copy {
+  margin-left: auto; display: inline-flex; align-items: center; gap: 7px;
+  padding: 6px 11px; border-radius: var(--r-sm); border: 1px solid var(--stroke);
+  background: transparent; color: var(--muted); font-size: 12px; font-weight: 500;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+.codewin__copy:hover { border-color: var(--bolt-line); color: var(--bolt-text); background: var(--bolt-soft); }
+.codewin__copy.is-done { border-color: rgba(63,185,80,0.4); color: var(--green); background: rgba(63,185,80,0.1); }
+.codewin__copy svg { flex: none; }
 .codewin pre {
   margin: 0; padding: 22px; overflow-x: auto; font-size: 13px; line-height: 1.85;
   font-family: var(--code); color: #c9d1d9;
@@ -286,13 +311,62 @@ p { margin: 0; }
   font-size: 10.5px; font-weight: 700; letter-spacing: 0.02em;
 }
 .tier__name { font-family: var(--code); font-size: 11.5px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
-.tier__price { margin: 16px 0 4px; font-family: var(--code); font-size: 30px; font-weight: 500; letter-spacing: -0.025em; }
-.tier__price span { font-family: "Inter", sans-serif; font-size: 13.5px; font-weight: 400; color: var(--dim); letter-spacing: 0; }
+.tier__price { margin: 16px 0 6px; font-family: var(--code); font-size: 30px; font-weight: 500; letter-spacing: -0.025em; }
+.tier__price span { display: block; margin-top: 3px; font-family: "Inter", sans-serif; font-size: 13px; font-weight: 400; color: var(--dim); letter-spacing: 0; }
 .tier__desc { color: var(--muted); font-size: 14px; min-height: 42px; }
 .tier__models { list-style: none; margin: 22px 0 0; padding: 22px 0 0; border-top: 1px solid var(--stroke); display: grid; gap: 11px; }
 .tier__models li { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--muted); }
 .tier__models li svg { width: 18px; height: 18px; flex: none; }
 .tier__models li b { color: var(--text); font-weight: 600; margin-left: auto; font-variant-numeric: tabular-nums; font-size: 13px; }
+
+/* ================== calculator ================== */
+.calc {
+  margin-top: 22px; padding: 30px; border-radius: var(--r-lg);
+  border: 1px solid var(--stroke); background: var(--bg-2);
+}
+.calc__head .eyebrow { margin-bottom: 12px; }
+.calc__head h3 { font-size: 21px; }
+.calc__controls { display: grid; grid-template-columns: 1.6fr 1fr; gap: 26px; margin-top: 26px; align-items: end; }
+.calc__field { display: block; }
+.calc__lbl {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+  font-size: 13px; color: var(--dim); margin-bottom: 12px;
+}
+.calc__lbl output { font-family: var(--code); font-size: 14px; color: var(--bolt-text); font-variant-numeric: tabular-nums; }
+.calc__field input[type="range"] {
+  -webkit-appearance: none; appearance: none; width: 100%; height: 4px; margin: 0;
+  border-radius: 3px; background: var(--surface-2); cursor: pointer;
+}
+.calc__field input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 16px; height: 16px; border-radius: 50%;
+  background: var(--bolt); border: 3px solid var(--bg-2); box-shadow: 0 0 0 1px var(--bolt-line); cursor: pointer;
+}
+.calc__field input[type="range"]::-moz-range-thumb {
+  width: 14px; height: 14px; border: none; border-radius: 50%; background: var(--bolt); cursor: pointer;
+}
+.calc__field select {
+  width: 100%; padding: 10px 13px; border-radius: var(--r-sm);
+  border: 1px solid var(--stroke); background: var(--bg-3); color: var(--text);
+  font-family: var(--code); font-size: 13.5px; cursor: pointer;
+}
+.calc__field select:hover { border-color: var(--stroke-strong); }
+.calc__out {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin-top: 28px;
+  border: 1px solid var(--stroke); border-radius: var(--r); overflow: hidden; background: var(--stroke);
+}
+.calc__cell { background: var(--bg-3); padding: 18px 20px; display: grid; gap: 6px; }
+.calc__cell span { font-size: 12.5px; color: var(--dim); }
+.calc__cell b {
+  font-family: var(--code); font-size: clamp(18px, 2vw, 23px); font-weight: 500;
+  letter-spacing: -0.02em; font-variant-numeric: tabular-nums; color: var(--muted);
+}
+.calc__cell b.calc__zeus { color: var(--text); }
+.calc__cell b.calc__save { color: var(--green); }
+.calc__cell b i {
+  font-family: "Inter", sans-serif; font-style: normal; font-size: 13px;
+  font-weight: 400; color: var(--dim); margin-left: 7px; letter-spacing: 0;
+}
+.calc__note { margin-top: 14px; font-size: 12.5px; color: var(--dim); }
 
 /* ================== compare table ================== */
 .table-wrap { border: 1px solid var(--stroke); border-radius: var(--r-lg); overflow: hidden; }
@@ -418,6 +492,9 @@ td.zeus { color: var(--text); font-weight: 500; font-family: var(--code); font-v
   .hero__actions .btn, .cta__actions .btn { width: 100%; }
   .hero__badge { font-size: 12px; padding: 7px 8px 7px 12px; text-align: left; }
   .card, .panel, .tier { padding: 24px; }
+  .calc { padding: 24px; }
+  .calc__controls { grid-template-columns: 1fr; gap: 20px; }
+  .calc__out { grid-template-columns: 1fr; }
 }
 @media (max-width: 420px) {
   .hero__stats { grid-template-columns: 1fr; }

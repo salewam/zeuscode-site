@@ -6,16 +6,62 @@
 <title>ZeusCode — лучший агрегатор нейросетей для кодинга в СНГ</title>
 <meta name="description" content="ZeusCode — один API ко всем топовым моделям: Claude, GPT, Gemini, DeepSeek, Grok, GLM. Автоматический routing, экономия токенов до 60%, fallback при сбоях. Оплата в рублях, без VPN.">
 <meta name="theme-color" content="#0d1117">
+<link rel="canonical" href="https://salewam.github.io/zeuscode-site/">
 <meta property="og:title" content="ZeusCode — агрегатор нейросетей для кодинга">
 <meta property="og:description" content="Один API ко всем топовым LLM. Routing, экономия токенов, fallback. Оплата в рублях.">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://salewam.github.io/zeuscode-site/">
+<meta property="og:image" content="https://salewam.github.io/zeuscode-site/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="ZeusCode">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ZeusCode — агрегатор нейросетей для кодинга">
+<meta name="twitter:description" content="41 модель в одном ключе. Routing под задачу, экономия токенов до 60%, fallback. Оплата в рублях.">
+<meta name="twitter:image" content="https://salewam.github.io/zeuscode-site/assets/og.png">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%230d1117'/%3E%3Cpath d='M13 3 5 14h6l-1 8 8-11h-6z' fill='%237dd3fc'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "ZeusCode",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Web, CLI, IDE",
+      "url": "https://salewam.github.io/zeuscode-site/",
+      "description": "Один API ко всем топовым нейросетям для кода: Claude, GPT, Gemini, DeepSeek, Grok, GLM. Автоматический routing, экономия токенов, fallback. Оплата в рублях.",
+      "offers": {
+        "@type": "Offer",
+        "price": "30",
+        "priceCurrency": "RUB",
+        "description": "от 30 ₽ за 1 млн входящих токенов, без подписки"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "Нужен ли VPN и зарубежная карта?", "acceptedAnswer": { "@type": "Answer", "text": "Нет. Мы доступны из СНГ напрямую, оплата — картой РФ, СБП или криптой. К нейросетям ходим мы, а не вы." } },
+        { "@type": "Question", "name": "Надо переписывать код?", "acceptedAnswer": { "@type": "Answer", "text": "Нет. Мы работаем в формате OpenAI: меняете адрес и ключ — остальное как было." } },
+        { "@type": "Question", "name": "Как вы экономите токены?", "acceptedAnswer": { "@type": "Answer", "text": "Перед отправкой чистим запрос: убираем повторы, дубли сообщений и раздутые технические блоки. У лимита сжимаем историю, оставляя главное." } },
+        { "@type": "Question", "name": "Качество не упадёт от сжатия?", "acceptedAnswer": { "@type": "Answer", "text": "Важное остаётся, убирается только шум. Плюс мы всегда оставляем модели место на полный ответ." } },
+        { "@type": "Question", "name": "Что если нейросеть упала?", "acceptedAnswer": { "@type": "Answer", "text": "Повторяем запрос сами, а если модель недоступна — уходим на другую из вашего списка. Запрос и переписка не теряются." } },
+        { "@type": "Question", "name": "Есть подписка?", "acceptedAnswer": { "@type": "Answer", "text": "Нет. Только баланс: пополнили — тратите по факту. Деньги не сгорают." } },
+        { "@type": "Question", "name": "Вы храните мой код?", "acceptedAnswer": { "@type": "Answer", "text": "На обучении ваши запросы не используются. Секреты можно маскировать: они подменяются заглушками до отправки и возвращаются в ответе." } },
+        { "@type": "Question", "name": "Подойдёт команде?", "acceptedAnswer": { "@type": "Answer", "text": "Да. Несколько ключей на один баланс, лимиты по каждому и расходы по проектам в кабинете." } }
+      ]
+    }
+  ]
+}
+</script>
 </head>
 <body>
+<a class="skip" href="#top">К содержимому</a>
 
 <!-- ============ SVG sprite ============ -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -66,7 +112,7 @@
       <a href="#compare">Сравнение</a>
       <a href="#faq">FAQ</a>
     </nav>
-    <button class="burger" id="burger" aria-label="Меню">
+    <button class="burger" id="burger" aria-label="Меню" aria-expanded="false" aria-controls="nav">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
     </button>
     <div class="header__cta">
@@ -117,10 +163,10 @@
         Сменить модель — это одна строка в запросе, а не новая регистрация и новая карта.</p>
     </div>
   </div>
-  <div class="marquee reveal" data-d="1">
+  <div class="marquee reveal" data-d="1" aria-hidden="true">
     <div class="marquee__track" id="track1"></div>
   </div>
-  <div class="marquee reveal" data-d="2" style="margin-top:14px">
+  <div class="marquee reveal" data-d="2" style="margin-top:14px" aria-hidden="true">
     <div class="marquee__track" id="track2"></div>
   </div>
 </section>
@@ -247,6 +293,10 @@
         <span class="codewin__dot"></span>
         <span class="codewin__dot"></span>
         <span class="codewin__title">quickstart.py</span>
+        <button class="codewin__copy" type="button" data-copy>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/></svg>
+          <span>Копировать</span>
+        </button>
       </div>
 <pre><span class="tok-k">from</span> openai <span class="tok-k">import</span> OpenAI
 
@@ -311,7 +361,7 @@ r = client.chat.completions.<span class="tok-f">create</span>(
     <div class="tiers">
       <div class="tier reveal" data-d="1">
         <div class="tier__name">Economy</div>
-        <div class="tier__price">от 30 ₽<span> / 1M токенов</span></div>
+        <div class="tier__price">от 30 ₽<span>за 1 млн токенов</span></div>
         <p class="tier__desc">Мелкие правки, черновики, автотесты.</p>
         <ul class="tier__models">
           <li><svg><use href="#i-gemini"/></svg>gemini-2.5-flash <b>30 ₽</b></li>
@@ -322,7 +372,7 @@ r = client.chat.completions.<span class="tok-f">create</span>(
       </div>
       <div class="tier tier--hot reveal" data-d="2">
         <div class="tier__name">Standard</div>
-        <div class="tier__price">от 141 ₽<span> / 1M токенов</span></div>
+        <div class="tier__price">от 141 ₽<span>за 1 млн токенов</span></div>
         <p class="tier__desc">Обычный ежедневный кодинг и рефакторинг.</p>
         <ul class="tier__models">
           <li><svg><use href="#i-claude"/></svg>claude-haiku-4-5 <b>141 ₽</b></li>
@@ -333,7 +383,7 @@ r = client.chat.completions.<span class="tok-f">create</span>(
       </div>
       <div class="tier reveal" data-d="3">
         <div class="tier__name">Premium</div>
-        <div class="tier__price">от 337 ₽<span> / 1M токенов</span></div>
+        <div class="tier__price">от 337 ₽<span>за 1 млн токенов</span></div>
         <p class="tier__desc">Сложная архитектура и критичный код.</p>
         <ul class="tier__models">
           <li><svg><use href="#i-claude"/></svg>claude-sonnet-5 <b>337 ₽</b></li>
@@ -344,7 +394,7 @@ r = client.chat.completions.<span class="tok-f">create</span>(
       </div>
       <div class="tier reveal" data-d="4">
         <div class="tier__name">Ultra</div>
-        <div class="tier__price">от 841 ₽<span> / 1M токенов</span></div>
+        <div class="tier__price">от 841 ₽<span>за 1 млн токенов</span></div>
         <p class="tier__desc">Когда качество важнее цены.</p>
         <ul class="tier__models">
           <li><svg><use href="#i-openai"/></svg>gpt-5.6-terra <b>841 ₽</b></li>
@@ -353,6 +403,33 @@ r = client.chat.completions.<span class="tok-f">create</span>(
           <li><svg><use href="#i-qwen"/></svg>qwen3.7-max <b>5 521 ₽</b></li>
         </ul>
       </div>
+    </div>
+    <div class="calc reveal" data-d="2">
+      <div class="calc__head">
+        <p class="eyebrow">Калькулятор</p>
+        <h3>Сколько вы переплачиваете сейчас</h3>
+      </div>
+      <div class="calc__controls">
+        <label class="calc__field">
+          <span class="calc__lbl">Токенов в месяц <output id="calcTokensOut">30 млн</output></span>
+          <input id="calcTokens" type="range" min="1" max="200" step="1" value="30" aria-label="Токенов в месяц, млн">
+        </label>
+        <label class="calc__field">
+          <span class="calc__lbl">Основная модель</span>
+          <select id="calcModel" aria-label="Основная модель">
+            <option value="600|331" selected>claude-sonnet-4-6</option>
+            <option value="180|141">claude-haiku-4-5</option>
+            <option value="500|442">gpt-5.4</option>
+            <option value="40|30">gemini-2.5-flash</option>
+          </select>
+        </label>
+      </div>
+      <div class="calc__out">
+        <div class="calc__cell"><span>Другие агрегаторы</span><b id="calcOther">—</b></div>
+        <div class="calc__cell"><span>ZeusCode со сжатием</span><b id="calcZeus" class="calc__zeus">—</b></div>
+        <div class="calc__cell"><span>Экономия за год</span><b id="calcSave" class="calc__save">—</b></div>
+      </div>
+      <p class="calc__note">Считаем по цене входящих токенов и сжатию контекста на 35%. Точный расход виден в кабинете.</p>
     </div>
     <p class="table-note reveal">Указана цена входящих токенов. Полный прайс — в кабинете. Курс фиксируется в момент пополнения.</p>
   </div>
@@ -524,7 +601,7 @@ r = client.chat.completions.<span class="tok-f">create</span>(
   </div>
 </footer>
 
-<script src="js/app.js"></script>
-<script type="module" src="js/globe.js"></script>
+<script src="js/app.js" defer></script>
+<script type="module" src="js/globe-boot.js"></script>
 </body>
 </html>

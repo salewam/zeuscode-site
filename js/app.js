@@ -51,10 +51,14 @@
   var burger = document.getElementById("burger");
   var nav = document.getElementById("nav");
   burger.addEventListener("click", function () {
-    nav.classList.toggle("is-open");
+    var open = nav.classList.toggle("is-open");
+    burger.setAttribute("aria-expanded", String(open));
   });
   nav.addEventListener("click", function (e) {
-    if (e.target.tagName === "A") nav.classList.remove("is-open");
+    if (e.target.tagName === "A") {
+      nav.classList.remove("is-open");
+      burger.setAttribute("aria-expanded", "false");
+    }
   });
 
   /* ---------- scroll reveal ---------- */
@@ -101,6 +105,26 @@
   /* ---------- FAQ accordion ---------- */
   var faqList = document.getElementById("faqList");
   if (faqList) {
+    var items = faqList.querySelectorAll(".faq__item");
+    items.forEach(function (item, i) {
+      var q = item.querySelector(".faq__q");
+      var a = item.querySelector(".faq__a");
+      q.id = "faq-q-" + i;
+      a.id = "faq-a-" + i;
+      q.setAttribute("aria-expanded", "false");
+      q.setAttribute("aria-controls", a.id);
+      a.setAttribute("role", "region");
+      a.setAttribute("aria-labelledby", q.id);
+    });
+
+    function closeAll() {
+      faqList.querySelectorAll(".faq__item.is-open").forEach(function (x) {
+        x.classList.remove("is-open");
+        x.querySelector(".faq__a").style.maxHeight = "0px";
+        x.querySelector(".faq__q").setAttribute("aria-expanded", "false");
+      });
+    }
+
     faqList.addEventListener("click", function (e) {
       var btn = e.target.closest(".faq__q");
       if (!btn) return;
@@ -108,16 +132,81 @@
       var body = item.querySelector(".faq__a");
       var open = item.classList.contains("is-open");
 
-      faqList.querySelectorAll(".faq__item.is-open").forEach(function (x) {
-        x.classList.remove("is-open");
-        x.querySelector(".faq__a").style.maxHeight = "0px";
-      });
+      closeAll();
 
       if (!open) {
         item.classList.add("is-open");
         body.style.maxHeight = body.scrollHeight + "px";
+        btn.setAttribute("aria-expanded", "true");
       }
     });
+
+    window.addEventListener("resize", function () {
+      var open = faqList.querySelector(".faq__item.is-open .faq__a");
+      if (open) open.style.maxHeight = open.scrollHeight + "px";
+    });
+  }
+
+  /* ---------- copy code snippet ---------- */
+  document.querySelectorAll("[data-copy]").forEach(function (btn) {
+    var label = btn.querySelector("span");
+    var pre = btn.closest(".codewin").querySelector("pre");
+    btn.addEventListener("click", function () {
+      navigator.clipboard.writeText(pre.innerText).then(function () {
+        btn.classList.add("is-done");
+        label.textContent = "Скопировано";
+        setTimeout(function () {
+          btn.classList.remove("is-done");
+          label.textContent = "Копировать";
+        }, 1800);
+      });
+    });
+  });
+
+  /* ---------- active nav section ---------- */
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll(".nav a[href^='#']"));
+  var targets = navLinks
+    .map(function (a) { return document.querySelector(a.getAttribute("href")); })
+    .filter(Boolean);
+  if (targets.length && "IntersectionObserver" in window) {
+    var visible = {};
+    var sio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { visible[en.target.id] = en.isIntersecting; });
+      var current = "";
+      targets.forEach(function (t) { if (visible[t.id]) current = current || t.id; });
+      navLinks.forEach(function (a) {
+        a.classList.toggle("is-active", a.getAttribute("href") === "#" + current);
+      });
+    }, { rootMargin: "-25% 0px -60% 0px" });
+    targets.forEach(function (t) { sio.observe(t); });
+  }
+
+  /* ---------- savings calculator ---------- */
+  var calcTokens = document.getElementById("calcTokens");
+  if (calcTokens) {
+    var calcModel = document.getElementById("calcModel");
+    var out = document.getElementById("calcTokensOut");
+    var cOther = document.getElementById("calcOther");
+    var cZeus = document.getElementById("calcZeus");
+    var cSave = document.getElementById("calcSave");
+    var COMPRESSION = 0.65; /* сжатие контекста −35% */
+
+    function rub(v) {
+      return Math.round(v).toLocaleString("ru-RU") + " ₽";
+    }
+    function recalc() {
+      var mln = parseInt(calcTokens.value, 10);
+      var parts = calcModel.value.split("|");
+      var other = mln * parseFloat(parts[0]);
+      var zeus = mln * parseFloat(parts[1]) * COMPRESSION;
+      out.textContent = mln + " млн";
+      cOther.innerHTML = rub(other) + '<i>/ мес</i>';
+      cZeus.innerHTML = rub(zeus) + '<i>/ мес</i>';
+      cSave.textContent = rub(Math.max(0, other - zeus) * 12);
+    }
+    calcTokens.addEventListener("input", recalc);
+    calcModel.addEventListener("change", recalc);
+    recalc();
   }
 
   /* ---------- card cursor glow ---------- */
@@ -126,17 +215,6 @@
       var r = card.getBoundingClientRect();
       card.style.setProperty("--mx", (e.clientX - r.left) + "px");
       card.style.setProperty("--my", (e.clientY - r.top) + "px");
-    });
-  });
-  /* ---------- smooth anchor offset for fixed header ---------- */
-  document.querySelectorAll('a[href^="#"]').forEach(function (a) {
-    a.addEventListener("click", function (e) {
-      var id = a.getAttribute("href");
-      if (id.length < 2) return;
-      var t = document.querySelector(id);
-      if (!t) return;
-      e.preventDefault();
-      window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - 82, behavior: "smooth" });
     });
   });
 })();
