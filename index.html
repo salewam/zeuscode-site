@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ZeusCode — лучший агрегатор нейросетей для кодинга в СНГ</title>
+<meta name="description" content="ZeusCode — один API ко всем топовым моделям: Claude, GPT, Gemini, DeepSeek, Grok, GLM. Автоматический routing, экономия токенов до 60%, fallback при сбоях. Оплата в рублях, без VPN.">
+<meta name="theme-color" content="#06060b">
+<meta property="og:title" content="ZeusCode — агрегатор нейросетей для кодинга">
+<meta property="og:description" content="Один API ко всем топовым LLM. Routing, экономия токенов, fallback. Оплата в рублях.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%237c5cff'/%3E%3Cpath d='M13 3 5 14h6l-1 8 8-11h-6z' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- ============ SVG sprite ============ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2 4.5 13.5H11l-1 8.5 8.5-11.5H12z" fill="currentColor"/></symbol>
+    <symbol id="i-claude" viewBox="0 0 24 24"><path fill="#D97757" d="M12 1.6l2.36 6.03L20.4 10 14.36 12.37 12 18.4 9.64 12.37 3.6 10l6.04-2.37zM17.9 16.1l.98 2.5 2.5.98-2.5.98-.98 2.5-.98-2.5-2.5-.98 2.5-.98zM5.6 15.2l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z"/></symbol>
+    <symbol id="i-openai" viewBox="0 0 24 24"><path fill="#fff" d="M21.5 9.9a5.6 5.6 0 0 0-.48-4.6 5.68 5.68 0 0 0-6.1-2.72A5.63 5.63 0 0 0 5.3 4.1a5.6 5.6 0 0 0-3.75 2.72 5.66 5.66 0 0 0 .7 6.63 5.6 5.6 0 0 0 .48 4.6 5.68 5.68 0 0 0 6.1 2.72 5.62 5.62 0 0 0 9.62-1.52 5.6 5.6 0 0 0 3.74-2.72 5.66 5.66 0 0 0-.7-6.63zM12.6 21.1a4.2 4.2 0 0 1-2.7-.97l.13-.08 4.5-2.6a.73.73 0 0 0 .37-.64V10.5l1.9 1.1c.02 0 .03.03.04.05v5.26a4.2 4.2 0 0 1-4.24 4.2zM3.5 17.2a4.18 4.18 0 0 1-.5-2.8l.13.08 4.5 2.6c.23.13.5.13.73 0l5.5-3.17v2.2a.08.08 0 0 1-.03.06l-4.52 2.6a4.22 4.22 0 0 1-5.76-1.54zM2.32 7.6a4.2 4.2 0 0 1 2.2-1.84v5.35c0 .26.14.5.36.64l5.48 3.16-1.9 1.1a.08.08 0 0 1-.08 0L3.86 13.4A4.2 4.2 0 0 1 2.32 7.6zm15.3 3.55L12.14 8l1.9-1.1a.08.08 0 0 1 .08 0l4.52 2.6a4.2 4.2 0 0 1-.65 7.58v-5.35a.73.73 0 0 0-.36-.63zm1.89-2.84l-.13-.08-4.5-2.6a.74.74 0 0 0-.74 0L8.65 8.8V6.6a.08.08 0 0 1 .03-.06l4.52-2.6a4.22 4.22 0 0 1 6.26 4.37zM7.62 12.25l-1.9-1.1a.08.08 0 0 1-.04-.05V5.85a4.22 4.22 0 0 1 6.92-3.24l-.13.08-4.5 2.6a.73.73 0 0 0-.37.63zm1.03-2.22L11.1 8.6l2.45 1.42v2.83L11.1 14.3l-2.45-1.42z"/></symbol>
+    <symbol id="i-gemini" viewBox="0 0 24 24"><path fill="#4285F4" d="M12 1c.6 4.9 5.1 9.4 10 10-4.9.6-9.4 5.1-10 10-.6-4.9-5.1-9.4-10-10C6.9 10.4 11.4 5.9 12 1z"/></symbol>
+    <symbol id="i-deepseek" viewBox="0 0 24 24"><path fill="#4D6BFE" d="M21.8 4.6c-.3-.2-.6 0-.9.2-.4.3-.8.7-1.3 1-1.1.7-2.3.6-3.4-.2-1.5-1-3-1.5-4.8-1-2.6.7-4.2 2.5-4.6 5.2-.1.7-.1 1.4.1 2.1.1.4 0 .6-.3.8-1 .6-1.8 1.4-2.3 2.5-.2.4-.3.9-.4 1.4.5-.3.9-.6 1.4-.8.4-.2.5-.1.5.3 0 1.6.6 3 1.7 4.1 1.5 1.5 3.3 2 5.4 1.7 3.5-.5 6.2-3.4 6.4-7 .1-1.5-.3-2.9-1.1-4.2-.2-.3-.2-.5.1-.7 1-.9 1.6-2 1.9-3.3.1-.5.2-1-.1-1.4-.1-.3-.2-.6-.3-.7zM13.8 16c-1.9 0-3.4-1.5-3.4-3.4 0-1.9 1.5-3.4 3.4-3.4 1.9 0 3.4 1.5 3.4 3.4 0 1.9-1.5 3.4-3.4 3.4z"/><circle cx="13.8" cy="12.6" r="1.4" fill="#4D6BFE"/></symbol>
+    <symbol id="i-grok" viewBox="0 0 24 24"><path fill="#fff" d="M3 21l7.6-9.6L3.4 3h3.9l5.1 6.2L17.9 3h2.6l-6.6 8.3L21.6 21h-4l-5.3-6.5L6.6 21z"/></symbol>
+    <symbol id="i-glm" viewBox="0 0 24 24"><path fill="#3859FF" d="M4 4h16v3.1l-9.5 9.8H20V20H4v-3.1L13.4 7.1H4z"/></symbol>
+    <symbol id="i-qwen" viewBox="0 0 24 24"><path fill="#6B4FFF" d="M12 2l4.5 3.4-1.7 3H19l2.5 4.3-4.4 7.9h-4l2.1-3.7H9.2L7 20.6H2.6l2.3-4.1h5.1l1.7-3H6.4L4 9.2h4.4L6.7 6.2z"/></symbol>
+    <symbol id="i-kimi" viewBox="0 0 24 24"><path fill="#1F1F1F" d="M2 2h20v20H2z" opacity="0"/><path fill="#00D3AB" d="M4 5h3.3v5.4L13 5h4.2l-5.5 5.3 6.3 8.7h-4L9.8 12.6l-2.5 2.3V19H4z"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="m4 12.5 5 5L20 6.5"/></symbol>
+    <symbol id="i-route" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M4 6h4c4 0 4 12 8 12h4M4 18h3M17 3l3 3-3 3M17 15l3 3-3 3"/></symbol>
+    <symbol id="i-coin" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M12 3v18M8 7h5a3 3 0 0 1 0 6H8m0 0h5.5a3.2 3.2 0 0 1 0 6.5H8"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M12 3l8 3v6c0 5-3.4 8-8 9-4.6-1-8-4-8-9V6zM9 12l2 2 4-4"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M20 12a8 8 0 1 1-2.3-5.7M20 4v4h-4"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="m12 3 9 5-9 5-9-5zM3 13l9 5 9-5M3 17.5l9 5 9-5"/></symbol>
+    <symbol id="i-gauge" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M4 18a9 9 0 1 1 16 0M12 14l4-4"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M6 11h12v9H6zM9 11V8a3 3 0 0 1 6 0v3"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M4 20V4M4 20h16M8 16V11M12.5 16V7M17 16v-4"/></symbol>
+    <symbol id="i-term" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M3 4h18v16H3zM7 10l2.5 2.5L7 15M12.5 15H17"/></symbol>
+    <symbol id="i-cursor" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M5 3l14 8-6.5 1.8L9.6 19z"/></symbol>
+    <symbol id="i-tg" viewBox="0 0 24 24"><path fill="#2AABEE" d="M21.9 4.3 18.8 19c-.2 1-.9 1.3-1.7.8l-4.7-3.5-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.8 8.7-7.9c.4-.3-.1-.5-.6-.2L6.7 12.9 2.5 11.6c-1-.3-1-1 .2-1.5l18-6.9c.8-.3 1.5.2 1.2 1.1z"/></symbol>
+    <symbol id="i-code" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="m8 8-4 4 4 4M16 8l4 4-4 4M13.5 5l-3 14"/></symbol>
+  </defs>
+</svg>
+
+<div class="bg-fx" aria-hidden="true">
+  <div class="bg-fx__grid"></div>
+  <div class="blob blob--1"></div>
+  <div class="blob blob--2"></div>
+  <div class="blob blob--3"></div>
+</div>
+<!-- ============ HEADER ============ -->
+<header class="header" id="header">
+  <div class="wrap header__inner">
+    <a href="#top" class="logo">
+      <span class="logo__mark"><svg><use href="#i-bolt"/></svg></span>Zeus<span class="grad-text">Code</span>
+    </a>
+    <nav class="nav" id="nav">
+      <a href="#models">Модели</a>
+      <a href="#features">Возможности</a>
+      <a href="#how">Как работает</a>
+      <a href="#pricing">Цены</a>
+      <a href="#compare">Сравнение</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <button class="burger" id="burger" aria-label="Меню">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <div class="header__cta">
+      <a href="#pricing" class="btn btn--ghost">Тарифы</a>
+      <a href="#start" class="btn btn--primary">Начать бесплатно</a>
+    </div>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<main id="top">
+<section class="hero">
+  <div class="wrap">
+    <div class="hero__badge reveal">
+      <span class="pill">NEW</span>
+      <b>41 модель</b> — Claude, GPT, Gemini, DeepSeek, Grok, GLM
+    </div>
+    <h1 class="reveal" data-d="1">
+      <span class="line">Лучший агрегатор</span>
+      <span class="line grad-text">нейросетей для кодинга</span>
+      <span class="line">в СНГ</span>
+    </h1>
+    <p class="hero__sub reveal" data-d="2">
+      Один API вместо десятка интеграций. ZeusCode сам выбирает модель под задачу,
+      сжимает контекст, экономит токены и подхватывает запрос, если провайдер упал.
+      Оплата в рублях, без VPN и зарубежных карт.
+    </p>
+    <div class="hero__actions reveal" data-d="3">
+      <a href="#start" class="btn btn--primary btn--lg">Получить API-ключ<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a href="#how" class="btn btn--ghost btn--lg">Посмотреть, как работает</a>
+    </div>
+    <p class="hero__note reveal" data-d="4">Бесплатный старт · Без подписки · Платите только за токены</p>
+
+    <!-- orbit -->
+    <div class="orbit reveal" data-d="2" aria-hidden="true">
+      <div class="orbit__ring"></div>
+      <div class="orbit__ring orbit__ring--2"></div>
+      <div class="orbit__spin" id="orbit1"></div>
+      <div class="orbit__spin orbit__spin--2" id="orbit2"></div>
+      <div class="orbit__core"><svg><use href="#i-bolt"/></svg></div>
+    </div>
+
+    <div class="hero__stats reveal">
+      <div class="stat"><div class="stat__num grad-text" data-count="41" data-suffix="">0</div><div class="stat__label">моделей в каталоге</div></div>
+      <div class="stat"><div class="stat__num grad-text" data-count="60" data-suffix="%">0</div><div class="stat__label">экономия на токенах</div></div>
+      <div class="stat"><div class="stat__num grad-text" data-count="45" data-suffix="%">0</div><div class="stat__label">дешевле конкурентов</div></div>
+      <div class="stat"><div class="stat__num grad-text" data-count="99" data-suffix=",9%">0</div><div class="stat__label">аптайм с fallback</div></div>
+    </div>
+  </div>
+</section>
+<!-- ============ MODELS MARQUEE ============ -->
+<section class="section section--tight" id="models">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <p class="eyebrow">Все провайдеры в одном ключе</p>
+      <h2>Топовые модели мира — <span class="grad-text">через один endpoint</span></h2>
+      <p class="lead">Anthropic, OpenAI, Google, DeepSeek, xAI, Z.ai, Alibaba, Moonshot.
+        Переключение модели — это одна строка в запросе, а не новая интеграция.</p>
+    </div>
+  </div>
+  <div class="marquee reveal" data-d="1">
+    <div class="marquee__track" id="track1"></div>
+  </div>
+  <div class="marquee reveal" data-d="2" style="margin-top:14px">
+    <div class="marquee__track" id="track2"></div>
+  </div>
+</section>
+
+<!-- ============ PAIN / GAIN ============ -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Зачем это нужно</p>
+      <h2>Кодить с LLM в СНГ <span class="gold-text">дорого и больно</span></h2>
+      <p class="lead">Разные API, карты, VPN, лимиты, падения провайдеров и счёт, который растёт быстрее проекта. ZeusCode убирает всё это.</p>
+    </div>
+    <div class="split">
+      <div class="panel panel--pain reveal" data-d="1">
+        <h3>Без ZeusCode</h3>
+        <ul>
+          <li><i>✕</i><span>Отдельная интеграция и биллинг под каждого провайдера</span></li>
+          <li><i>✕</i><span>Зарубежная карта, VPN, блокировки по региону</span></li>
+          <li><i>✕</i><span>Провайдер отдал 429/500 — запрос и контекст потеряны</span></li>
+          <li><i>✕</i><span>Длинный диалог упирается в контекстное окно и падает</span></li>
+          <li><i>✕</i><span>Одна и та же дорогая модель тащит и рефакторинг, и «поправь опечатку»</span></li>
+          <li><i>✕</i><span>Непонятно, куда ушли деньги: нет единой аналитики</span></li>
+        </ul>
+      </div>
+      <div class="panel panel--gain reveal" data-d="2">
+        <h3>С ZeusCode</h3>
+        <ul>
+          <li><i>✓</i><span>Один OpenAI-совместимый API ко всем 41 модели</span></li>
+          <li><i>✓</i><span>Оплата в рублях: карта РФ, СБП, крипта</span></li>
+          <li><i>✓</i><span>Авто-retry и fallback на совместимую модель — запрос доходит</span></li>
+          <li><i>✓</i><span>Сжатие истории и headroom: контекст не переполняется</span></li>
+          <li><i>✓</i><span>Routing отправляет задачу в модель, которая ей подходит по цене и качеству</span></li>
+          <li><i>✓</i><span>Единый кабинет: расход, лимиты, модели, эффект оптимизации</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ============ FEATURES ============ -->
+<section class="section" id="features">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Возможности</p>
+      <h2>Не просто прокси, а <span class="grad-text">слой оптимизации</span></h2>
+      <p class="lead">ZeusCode стоит между вашим кодом и моделями: маршрутизирует, сжимает, страхует и считает деньги.</p>
+    </div>
+    <div class="grid grid--3">
+      <article class="card reveal" data-d="1">
+        <div class="card__icon"><svg><use href="#i-route"/></svg></div>
+        <h3>Умный routing</h3>
+        <p>Запрос уходит в модель, которая лучше подходит под тип задачи, доступность и вашу политику. Для сложных кейсов — reasoning-routing.</p>
+      </article>
+      <article class="card reveal" data-d="2">
+        <div class="card__icon"><svg><use href="#i-coin"/></svg></div>
+        <h3>Экономия токенов</h3>
+        <p>Дедупликация сообщений, срезание раздутых tool outputs, компактное представление контекста. Меньше входных токенов — дешевле каждый turn.</p>
+      </article>
+      <article class="card reveal" data-d="3">
+        <div class="card__icon"><svg><use href="#i-layers"/></svg></div>
+        <h3>Комбо-стратегии</h3>
+        <p>Pipeline, fusion и panel: одна модель разбирает задачу, вторая пишет код, третья проверяет. Последовательно или параллельно.</p>
+      </article>
+      <article class="card reveal" data-d="1">
+        <div class="card__icon"><svg><use href="#i-refresh"/></svg></div>
+        <h3>Fallback и retry</h3>
+        <p>4xx, 5xx, timeout или отказ провайдера обрабатываются автоматически. Если основная модель недоступна — выполнение продолжается на совместимой.</p>
+      </article>
+      <article class="card reveal" data-d="2">
+        <div class="card__icon"><svg><use href="#i-gauge"/></svg></div>
+        <h3>Контекст без переполнений</h3>
+        <p>Эффективное сжатие истории у границы окна и зарезервированный headroom, чтобы модели хватило места на полноценный ответ.</p>
+      </article>
+      <article class="card reveal" data-d="3">
+        <div class="card__icon"><svg><use href="#i-lock"/></svg></div>
+        <h3>Маскирование данных</h3>
+        <p>Чувствительные фрагменты скрываются перед отправкой провайдеру и восстанавливаются в ответе. Ключи и секреты не улетают наружу.</p>
+      </article>
+      <article class="card reveal" data-d="1">
+        <div class="card__icon"><svg><use href="#i-chart"/></svg></div>
+        <h3>Usage accounting</h3>
+        <p>Видно фактическое потребление, расход по моделям и эффект оптимизации в рублях — а не абстрактные «кредиты».</p>
+      </article>
+      <article class="card reveal" data-d="2">
+        <div class="card__icon"><svg><use href="#i-shield"/></svg></div>
+        <h3>Стабильность качества</h3>
+        <p>При сжатии сохраняются ключевые инструкции и факты, шум убирается. Ответы не деградируют на длинных сессиях.</p>
+      </article>
+      <article class="card reveal" data-d="3">
+        <div class="card__icon"><svg><use href="#i-term"/></svg></div>
+        <h3>Работает в вашем IDE</h3>
+        <p>OpenAI-совместимый формат: Claude Code, Cursor, Cline, Continue, Aider, Zed. Меняете base_url и ключ — и всё.</p>
+      </article>
+    </div>
+  </div>
+</section>
+<!-- ============ HOW IT WORKS ============ -->
+<section class="section" id="how">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Как работает</p>
+      <h2>Три шага <span class="grad-text">до первого запроса</span></h2>
+    </div>
+    <div class="steps" style="margin-bottom:34px">
+      <div class="step reveal" data-d="1">
+        <div class="step__n">1</div>
+        <h3>Получите ключ</h3>
+        <p>Регистрация через Telegram, ключ выдаётся сразу. Стартовый баланс — на тесты, карта не нужна.</p>
+      </div>
+      <div class="step reveal" data-d="2">
+        <div class="step__n">2</div>
+        <h3>Подмените base_url</h3>
+        <p>В любом SDK или IDE указываете endpoint ZeusCode. Код менять не нужно — формат OpenAI-совместимый.</p>
+      </div>
+      <div class="step reveal" data-d="3">
+        <div class="step__n">3</div>
+        <h3>Кодьте</h3>
+        <p>Указываете модель явно или ставите <code>auto</code> — и routing сам решает, кому отдать задачу.</p>
+      </div>
+    </div>
+
+    <div class="codewin reveal" data-d="2">
+      <div class="codewin__bar">
+        <span class="codewin__dot" style="background:#ff5f57"></span>
+        <span class="codewin__dot" style="background:#febc2e"></span>
+        <span class="codewin__dot" style="background:#28c840"></span>
+        <span class="codewin__title">quickstart.py</span>
+      </div>
+<pre><span class="tok-k">from</span> openai <span class="tok-k">import</span> OpenAI
+
+client = <span class="tok-f">OpenAI</span>(
+    base_url=<span class="tok-s">"https://api.zeuscode.ru/v1"</span>,   <span class="tok-c"># единственное изменение</span>
+    api_key=<span class="tok-s">"zc-..."</span>,
+)
+
+r = client.chat.completions.<span class="tok-f">create</span>(
+    model=<span class="tok-s">"auto"</span>,                <span class="tok-c"># routing выберет модель под задачу</span>
+    messages=[{<span class="tok-s">"role"</span>: <span class="tok-s">"user"</span>, <span class="tok-s">"content"</span>: <span class="tok-s">"отрефактори этот модуль"</span>}],
+    extra_body={
+        <span class="tok-s">"zeus"</span>: {
+            <span class="tok-s">"strategy"</span>: <span class="tok-s">"crew"</span>,       <span class="tok-c"># architect → builder → finalizer</span>
+            <span class="tok-s">"compress_context"</span>: <span class="tok-p">True</span>,  <span class="tok-c"># экономия входных токенов</span>
+            <span class="tok-s">"fallback"</span>: [<span class="tok-s">"claude-sonnet-5"</span>, <span class="tok-s">"gpt-5.4"</span>],
+        }
+    },
+)
+
+<span class="tok-f">print</span>(r.choices[<span class="tok-n">0</span>].message.content)
+<span class="tok-f">print</span>(r.usage.zeus_saved_tokens)  <span class="tok-c"># сколько токенов сэкономлено</span></pre>
+    </div>
+  </div>
+</section>
+<!-- ============ CREW ============ -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">ZeusCode Crew</p>
+      <h2>Бригада из трёх моделей <span class="grad-text">вместо одной дорогой</span></h2>
+      <p class="lead">Готовая стратегия для кодинга: сильная модель думает над архитектурой, быстрая пишет код, дешёвая полирует результат. Один полный запрос — около 147&nbsp;₽ вместо 400+&nbsp;₽ на чистом Opus.</p>
+    </div>
+    <div class="crew">
+      <div class="crew__card reveal" data-d="1">
+        <div class="crew__role">Architect</div>
+        <div class="crew__model"><svg><use href="#i-claude"/></svg>claude-opus-4-6</div>
+        <p>Разбирает задачу, читает контекст проекта, проектирует решение и ставит ТЗ остальным. Включается только там, где реально нужен топ-уровень.</p>
+      </div>
+      <div class="crew__card reveal" data-d="2">
+        <div class="crew__role">Builder</div>
+        <div class="crew__model"><svg><use href="#i-openai"/></svg>gpt-5.4</div>
+        <p>Пишет код по плану архитектора. Быстро, дешевле в 3 раза по input и с хорошим следованием инструкциям.</p>
+      </div>
+      <div class="crew__card reveal" data-d="3">
+        <div class="crew__role">Finalizer</div>
+        <div class="crew__model"><svg><use href="#i-claude"/></svg>claude-haiku-4-5</div>
+        <p>Вычитывает diff, ловит мелочи, приводит стиль к конвенциям проекта. Стоит копейки — 141&nbsp;₽ за миллион входных токенов.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRICING ============ -->
+<section class="section" id="pricing">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Цены</p>
+      <h2>Платите за токены, <span class="grad-text">а не за подписку</span></h2>
+      <p class="lead">Никаких месячных платежей и сгорающих кредитов. Пополняете баланс в рублях и тратите столько, сколько реально используете. Цены — за 1&nbsp;млн токенов.</p>
+    </div>
+    <div class="tiers">
+      <div class="tier reveal" data-d="1">
+        <div class="tier__name">Economy</div>
+        <div class="tier__price">от 30 ₽<span> / 1M input</span></div>
+        <p class="tier__desc">Массовые запросы, черновики, простые правки и автотесты.</p>
+        <ul class="tier__models">
+          <li><svg><use href="#i-gemini"/></svg>gemini-2.5-flash <b>30 ₽</b></li>
+          <li><svg><use href="#i-deepseek"/></svg>deepseek-v4-pro <b>143 ₽</b></li>
+          <li><svg><use href="#i-deepseek"/></svg>deepseek-v4-flash <b>201 ₽</b></li>
+          <li><svg><use href="#i-glm"/></svg>glm-5.2 <b>216 ₽</b></li>
+        </ul>
+      </div>
+      <div class="tier tier--hot reveal" data-d="2">
+        <div class="tier__name">Standard</div>
+        <div class="tier__price">от 141 ₽<span> / 1M input</span></div>
+        <p class="tier__desc">Основной ежедневный кодинг, рефакторинг, code review.</p>
+        <ul class="tier__models">
+          <li><svg><use href="#i-claude"/></svg>claude-haiku-4-5 <b>141 ₽</b></li>
+          <li><svg><use href="#i-openai"/></svg>gpt-5.4-mini <b>192 ₽</b></li>
+          <li><svg><use href="#i-openai"/></svg>gpt-5.4 <b>442 ₽</b></li>
+          <li><svg><use href="#i-gemini"/></svg>gemini-3.5-flash <b>530 ₽</b></li>
+        </ul>
+      </div>
+      <div class="tier reveal" data-d="3">
+        <div class="tier__name">Premium</div>
+        <div class="tier__price">от 337 ₽<span> / 1M input</span></div>
+        <p class="tier__desc">Сложная архитектура, критичный код, финальная верификация.</p>
+        <ul class="tier__models">
+          <li><svg><use href="#i-claude"/></svg>claude-sonnet-5 <b>337 ₽</b></li>
+          <li><svg><use href="#i-gemini"/></svg>gemini-3-pro <b>696 ₽</b></li>
+          <li><svg><use href="#i-kimi"/></svg>kimi-k2.5 <b>904 ₽</b></li>
+          <li><svg><use href="#i-claude"/></svg>claude-opus-4-6 <b>1 491 ₽</b></li>
+        </ul>
+      </div>
+      <div class="tier reveal" data-d="4">
+        <div class="tier__name">Ultra</div>
+        <div class="tier__price">от 841 ₽<span> / 1M input</span></div>
+        <p class="tier__desc">Задачи, где качество output важнее любой цены.</p>
+        <ul class="tier__models">
+          <li><svg><use href="#i-openai"/></svg>gpt-5.6-terra <b>841 ₽</b></li>
+          <li><svg><use href="#i-grok"/></svg>grok-4.5 <b>888 ₽</b></li>
+          <li><svg><use href="#i-openai"/></svg>gpt-5.3-codex <b>6 184 ₽</b></li>
+          <li><svg><use href="#i-qwen"/></svg>qwen3.7-max <b>5 521 ₽</b></li>
+        </ul>
+      </div>
+    </div>
+    <p class="table-note reveal">Указана цена входных токенов. Полный прайс со стоимостью output — в кабинете. Курс фиксируется на момент пополнения.</p>
+  </div>
+</section>
+<!-- ============ COMPARE ============ -->
+<section class="section" id="compare">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Сравнение</p>
+      <h2>Дешевле, чем <span class="grad-text">самый дешёвый агрегатор РФ</span></h2>
+      <p class="lead">Сравнили себя с polza.ai на одинаковых моделях. На тех, где кодят каждый день, разница доходит до 45%.</p>
+    </div>
+    <div class="table-wrap reveal" data-d="1">
+      <table>
+        <thead>
+          <tr><th>Модель</th><th>Другие агрегаторы</th><th>ZeusCode</th><th>Разница</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="model">claude-sonnet-4-6</td><td data-label="Другие">600 ₽ / 1M</td><td class="zeus" data-label="ZeusCode">331 ₽ / 1M</td>
+            <td data-label="Разница"><span class="delta delta--good">−45%</span></td>
+          </tr>
+          <tr>
+            <td class="model">claude-haiku-4-5</td><td data-label="Другие">180 ₽ / 1M</td><td class="zeus" data-label="ZeusCode">141 ₽ / 1M</td>
+            <td data-label="Разница"><span class="delta delta--good">−22%</span></td>
+          </tr>
+          <tr>
+            <td class="model">gpt-4o-mini</td><td data-label="Другие">400 ₽ / 1M</td><td class="zeus" data-label="ZeusCode">331 ₽ / 1M</td>
+            <td data-label="Разница"><span class="delta delta--good">−17%</span></td>
+          </tr>
+          <tr>
+            <td class="model">gpt-5.4</td><td data-label="Другие">500 ₽ / 1M</td><td class="zeus" data-label="ZeusCode">442 ₽ / 1M</td>
+            <td data-label="Разница"><span class="delta delta--good">−12%</span></td>
+          </tr>
+          <tr>
+            <td class="model">gemini-2.5-flash</td><td data-label="Другие">40 ₽ / 1M</td><td class="zeus" data-label="ZeusCode">30 ₽ / 1M</td>
+            <td data-label="Разница"><span class="delta delta--good">−25%</span></td>
+          </tr>
+          <tr>
+            <td class="model">deepseek-v4-flash</td><td data-label="Другие">200 ₽ / 1M</td><td class="zeus" data-label="ZeusCode">201 ₽ / 1M</td>
+            <td data-label="Разница"><span class="delta delta--neutral">на уровне</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="table-note reveal">И это до оптимизации контекста. С включённым сжатием реальный счёт падает ещё на 30–60% — потому что вы просто отправляете меньше токенов.</p>
+  </div>
+</section>
+
+<!-- ============ IDE ============ -->
+<section class="section section--tight">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Интеграции</p>
+      <h2>Подключается туда, <span class="grad-text">где вы уже работаете</span></h2>
+    </div>
+    <div class="ide-list">
+      <div class="ide reveal" data-d="1"><svg><use href="#i-term"/></svg><span>Claude Code<small>CLI-агент</small></span></div>
+      <div class="ide reveal" data-d="1"><svg><use href="#i-cursor"/></svg><span>Cursor<small>IDE</small></span></div>
+      <div class="ide reveal" data-d="2"><svg><use href="#i-code"/></svg><span>Cline<small>VS Code</small></span></div>
+      <div class="ide reveal" data-d="2"><svg><use href="#i-code"/></svg><span>Continue<small>VS Code / JetBrains</small></span></div>
+      <div class="ide reveal" data-d="3"><svg><use href="#i-term"/></svg><span>Aider<small>CLI</small></span></div>
+      <div class="ide reveal" data-d="3"><svg><use href="#i-cursor"/></svg><span>Zed<small>IDE</small></span></div>
+      <div class="ide reveal" data-d="4"><svg><use href="#i-tg"/></svg><span>Telegram-бот<small>кодинг с телефона</small></span></div>
+      <div class="ide reveal" data-d="4"><svg><use href="#i-code"/></svg><span>OpenAI SDK<small>python / node / go</small></span></div>
+    </div>
+  </div>
+</section>
+<!-- ============ FAQ ============ -->
+<section class="section" id="faq">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <p class="eyebrow">FAQ</p>
+      <h2>Частые вопросы</h2>
+    </div>
+    <div class="faq" id="faqList">
+      <div class="faq__item reveal">
+        <button class="faq__q"><span>Нужен ли VPN и зарубежная карта?</span><i>+</i></button>
+        <div class="faq__a"><p>Нет. Endpoint доступен из СНГ напрямую, пополнение — картой РФ, СБП или криптой. Все запросы к провайдерам уходят с нашей стороны.</p></div>
+      </div>
+      <div class="faq__item reveal">
+        <button class="faq__q"><span>Придётся переписывать код под ваш API?</span><i>+</i></button>
+        <div class="faq__a"><p>Нет. Формат OpenAI-совместимый: меняете <code>base_url</code> и <code>api_key</code>, остальное работает как раньше. Расширенные функции (routing, crew, сжатие) включаются через необязательный <code>extra_body</code>.</p></div>
+      </div>
+      <div class="faq__item reveal">
+        <button class="faq__q"><span>Как именно вы экономите токены?</span><i>+</i></button>
+        <div class="faq__a"><p>Перед отправкой контекст оптимизируется: убираются дубли сообщений и повторяющиеся инструкции, срезаются раздутые tool outputs и служебные части, история переводится в более компактное представление. При приближении к лимиту окна включается сжатие с сохранением ключевых фактов. В usage видно, сколько токенов сэкономлено.</p></div>
+      </div>
+      <div class="faq__item reveal">
+        <button class="faq__q"><span>А качество ответов не падает от сжатия?</span><i>+</i></button>
+        <div class="faq__a"><p>Важные инструкции и факты сохраняются, убирается шум. Плюс резервируется headroom, чтобы модели хватило места на полный ответ. На практике на длинных сессиях качество выше, чем без оптимизации, — там диалог просто упирается в лимит окна.</p></div>
+      </div>
+      <div class="faq__item reveal">
+        <button class="faq__q"><span>Что будет, если провайдер упал?</span><i>+</i></button>
+        <div class="faq__a"><p>Запрос повторяется автоматически, а при недоступности модели выполнение продолжается на совместимой из вашего fallback-списка. Вы не теряете ни запрос, ни контекст и не пишете retry-логику руками.</p></div>
+      </div>
+      <div class="faq__item reveal">
+        <button class="faq__q"><span>Есть подписка или минимальный платёж?</span><i>+</i></button>
+        <div class="faq__a"><p>Нет. Только баланс: пополнили — тратите по факту потребления. Ничего не сгорает, неиспользованные деньги остаются вашими.</p></div>
+      </div>
+      <div class="faq__item reveal">
+        <button class="faq__q"><span>Вы храните мой код и переписку?</span><i>+</i></button>
+        <div class="faq__a"><p>Содержимое запросов не используется для обучения. Чувствительные фрагменты можно маскировать до отправки провайдеру — они подменяются на плейсхолдеры и восстанавливаются в ответе.</p></div>
+      </div>
+      <div class="faq__item reveal">
+        <button class="faq__q"><span>Подходит для команды?</span><i>+</i></button>
+        <div class="faq__a"><p>Да. Несколько ключей на один баланс, лимиты по ключу, разделение расходов по проектам и общая аналитика в кабинете.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="section" id="start">
+  <div class="wrap">
+    <div class="cta reveal">
+      <p class="eyebrow" style="justify-content:center">Начать</p>
+      <h2>Один ключ. <span class="grad-text">Все модели.</span> Рубли.</h2>
+      <p class="lead center">Регистрация занимает минуту, стартовый баланс — сразу. Проверьте на своём проекте, сколько вы переплачивали.</p>
+      <div class="cta__actions">
+        <a href="https://t.me/neptuneapp_bot" class="btn btn--primary btn--lg"><svg width="18" height="18"><use href="#i-tg"/></svg>Получить ключ в Telegram</a>
+        <a href="#pricing" class="btn btn--ghost btn--lg">Посмотреть прайс</a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div>
+        <a href="#top" class="logo">
+          <span class="logo__mark"><svg><use href="#i-bolt"/></svg></span>Zeus<span class="grad-text">Code</span>
+        </a>
+        <p class="footer__about">Агрегатор нейросетей для кодинга. Один API, 41 модель, routing и оптимизация контекста. Оплата в рублях.</p>
+      </div>
+      <div>
+        <h4>Продукт</h4>
+        <ul>
+          <li><a href="#models">Модели</a></li>
+          <li><a href="#features">Возможности</a></li>
+          <li><a href="#pricing">Цены</a></li>
+          <li><a href="#compare">Сравнение</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Разработчикам</h4>
+        <ul>
+          <li><a href="#how">Быстрый старт</a></li>
+          <li><a href="#how">API-справочник</a></li>
+          <li><a href="#faq">Интеграции с IDE</a></li>
+          <li><a href="#faq">Лимиты и ключи</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Контакты</h4>
+        <ul>
+          <li><a href="https://t.me/neptuneapp_bot">Telegram-бот</a></li>
+          <li><a href="#start">Поддержка</a></li>
+          <li><a href="#start">Для команд</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 ZeusCode. Все права защищены.</span>
+      <span>Цены указаны за 1 млн токенов и могут меняться вместе с курсом.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/app.js"></script>
+</body>
+</html>
