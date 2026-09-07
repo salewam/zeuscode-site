@@ -4,26 +4,24 @@
 
   /* ---------- model registry ---------- */
   var MODELS = [
-    { n: "claude-opus-4-6", i: "i-claude" },
+    { n: "claude-opus-5", i: "i-claude" },
     { n: "claude-sonnet-5", i: "i-claude" },
-    { n: "claude-haiku-4-5", i: "i-claude" },
-    { n: "gpt-5.4", i: "i-openai" },
+    { n: "claude-sonnet-4-6", i: "i-claude" },
+    { n: "claude-opus-4-6", i: "i-claude" },
+    { n: "claude-fable-5", i: "i-claude" },
+    { n: "gpt-5.6-sol", i: "i-openai" },
+    { n: "gpt-5.6-luna", i: "i-openai" },
     { n: "gpt-5.6-terra", i: "i-openai" },
-    { n: "gpt-5.3-codex", i: "i-openai" },
-    { n: "gemini-3-pro", i: "i-gemini" },
-    { n: "gemini-3.6-flash", i: "i-gemini" },
-    { n: "gemini-2.5-flash", i: "i-gemini" },
-    { n: "deepseek-v4-pro", i: "i-deepseek" },
-    { n: "deepseek-v4-flash", i: "i-deepseek" },
+    { n: "gpt-5.5", i: "i-openai" },
+    { n: "gpt-4o-mini", i: "i-openai" },
+    { n: "grok-4.6", i: "i-grok" },
     { n: "grok-4.5", i: "i-grok" },
-    { n: "grok-4.3", i: "i-grok" },
+    { n: "gemini-3.7-flash", i: "i-gemini" },
+    { n: "gemini-3.6-flash", i: "i-gemini" },
+    { n: "gemini-3.5-flash", i: "i-gemini" },
     { n: "glm-5.2", i: "i-glm" },
-    { n: "glm-5.1", i: "i-glm" },
-    { n: "qwen3.7-max", i: "i-qwen" },
-    { n: "qwen3.7-plus", i: "i-qwen" },
-    { n: "kimi-k2.7-code", i: "i-kimi" },
-    { n: "kimi-k2.5", i: "i-kimi" },
-    { n: "minimax-m3", i: "i-qwen" }
+    { n: "deepseek-v4-pro", i: "i-deepseek" },
+    { n: "kimi-k3", i: "i-kimi" }
   ];
 
   function chip(m) {
@@ -209,7 +207,137 @@
     recalc();
   }
 
-  /* ---------- card cursor glow ---------- */
+
+  /* ---------- live demo playground ---------- */
+  var demoForm = document.getElementById("demoForm");
+  if (demoForm) {
+    var demoPrompt = document.getElementById("demoPrompt");
+    var demoResult = document.getElementById("demoResult");
+    var demoSubmit = document.getElementById("demoSubmit");
+    var demoQuota = document.getElementById("demoQuota");
+    var demoLimit = 999000000000;
+    var demoUsed = parseInt(localStorage.getItem("zeus-demo-used") || "0", 10);
+    var demoApiUrl = window.ZEUS_DEMO_API_URL || "http://127.0.0.1:8080/v1/demo/chat/completions";
+
+    function updateDemoQuota() {
+      demoQuota.textContent = Math.max(0, demoLimit - demoUsed);
+      demoSubmit.disabled = demoUsed >= demoLimit;
+      if (demoUsed >= demoLimit) demoSubmit.setAttribute("aria-label", "Лимит на сегодня исчерпан");
+    }
+    function scrollDemo() {
+      demoResult.scrollTop = demoResult.scrollHeight;
+    }
+    function appendChatMessage(text) {
+      var node = document.createElement("div");
+      node.className = "chat-message";
+      node.textContent = text;
+      demoResult.appendChild(node);
+      return node;
+    }
+    function appendThinking() {
+      var node = document.createElement("div");
+      node.className = "chat-thinking";
+      var status = document.createElement("span");
+      status.className = "chat-thinking__text";
+      status.textContent = "Три модели получили запрос";
+      node.appendChild(status);
+      node.insertAdjacentHTML("beforeend", "<i></i><i></i><i></i>");
+      var statuses = [
+        "Три модели получили запрос",
+        "Сравниваем варианты",
+        "Собираем общий ответ"
+      ];
+      var index = 0;
+      node._statusTimer = setInterval(function () {
+        index = (index + 1) % statuses.length;
+        status.textContent = statuses[index];
+      }, 1100);
+      demoResult.appendChild(node);
+      return node;
+    }
+    function removeThinking(node) {
+      clearInterval(node._statusTimer);
+      node.remove();
+    }
+    function appendAnswer(label, text, error) {
+      var node = document.createElement("div");
+      node.className = "chat-answer";
+      if (error) node.classList.add("is-error");
+
+      var heading = document.createElement("div");
+      heading.className = "chat-answer__label";
+      heading.textContent = label;
+      node.appendChild(heading);
+
+      var body = document.createElement("div");
+      body.textContent = text;
+      node.appendChild(body);
+      demoResult.appendChild(node);
+      return node;
+    }
+    demoForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var prompt = demoPrompt.value.trim();
+      if (!prompt || demoUsed >= demoLimit) return;
+
+      var welcome = demoResult.querySelector(".chat-welcome");
+      if (welcome) welcome.remove();
+      demoUsed += 1;
+      localStorage.setItem("zeus-demo-used", String(demoUsed));
+      updateDemoQuota();
+      demoSubmit.disabled = true;
+      demoPrompt.disabled = true;
+
+      appendChatMessage(prompt);
+      var thinking = appendThinking();
+      demoPrompt.value = "";
+      scrollDemo();
+
+      fetch(demoApiUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          model: "zeuscode-demo",
+          messages: [{ role: "user", content: prompt }],
+          temperature: 0.4,
+          max_tokens: 1200
+        })
+      }).then(function (r) {
+        return r.json().catch(function () { return {}; }).then(function (data) {
+          if (!r.ok) {
+            var detail = data.detail || (data.error && (data.error.message || data.error)) || "API вернул ошибку";
+            var error = new Error(String(detail));
+            error.status = r.status;
+            throw error;
+          }
+          return data;
+        });
+      }).then(function (data) {
+        var text = data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content;
+        if (!text) throw new Error("Пустой ответ API");
+        removeThinking(thinking);
+        appendAnswer("Общий ответ", text, false);
+      }).catch(function (err) {
+        removeThinking(thinking);
+        var message = "Демо временно недоступно. Попробуйте ещё раз позже.";
+        if (/quota|insufficient|额度不足|квот|баланс/i.test(err.message)) {
+          message = "У демо закончилась квота моделей. Сервер подключён, но требуется пополнить баланс A6.";
+        } else if (err.status === 429) {
+          message = "Лимит демо-запросов исчерпан. Попробуйте завтра.";
+        } else if (err.status === 504) {
+          message = "Модели не успели подготовить ответ. Попробуйте ещё раз.";
+        }
+        appendAnswer("Не удалось получить ответ", message, true);
+        console.error("ZeusCode demo:", err);
+      }).finally(function () {
+        demoPrompt.disabled = false;
+        demoSubmit.disabled = demoUsed >= demoLimit;
+        scrollDemo();
+      });
+    });
+    updateDemoQuota();
+  }
+
   document.querySelectorAll(".card").forEach(function (card) {
     card.addEventListener("pointermove", function (e) {
       var r = card.getBoundingClientRect();
