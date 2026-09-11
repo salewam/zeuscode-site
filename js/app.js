@@ -46,6 +46,11 @@
   ];
   PRICE_ROWS.sort(function (a, b) { return b.output - a.output; });
 
+  var priceFormatter = new Intl.NumberFormat("ru-RU", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  function price(value) {
+    return priceFormatter.format(value) + " ₽";
+  }
+
   function chip(m) {
     return '<span class="chip"><svg><use href="#' + m.i + '"/></svg>' + m.n + "</span>";
   }
@@ -62,10 +67,6 @@
   /* ---------- public price table ---------- */
   var priceRows = document.getElementById("priceRows");
   if (priceRows) {
-    var priceFormatter = new Intl.NumberFormat("ru-RU", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-    function price(value) {
-      return priceFormatter.format(value) + " ₽";
-    }
     priceRows.innerHTML = PRICE_ROWS.map(function (row, index) {
       var rowClass = row.ready ? "" : " class=\"is-limited\"";
       var label = row.name || row.id;
@@ -75,8 +76,8 @@
         "<th scope=\"row\" class=\"price-model\"><span class=\"price-rank\">" + String(index + 1).padStart(2, "0") + "</span>" +
         "<svg aria-hidden=\"true\"><use href=\"#" + row.icon + "\"></use></svg>" +
         "<span><strong>" + label + "</strong><small>" + row.id + "</small></span></th>" +
-        "<td class=\"price-value\" data-label=\"Input / 1M\">" + price(row.input) + "</td>" +
-        "<td class=\"price-value price-value--strong\" data-label=\"Output / 1M\">" + price(row.output) + "</td>" +
+        "<td class=\"price-value\" data-label=\"Ваш текст / 1 млн\">" + price(row.input) + "</td>" +
+        "<td class=\"price-value price-value--strong\" data-label=\"Ответ / 1 млн\">" + price(row.output) + "</td>" +
         "<td data-label=\"Статус\"><span class=\"price-status " + statusClass + "\">" + status + "</span></td>" +
         "</tr>";
     }).join("");
@@ -232,7 +233,15 @@
     var cOther = document.getElementById("calcOther");
     var cZeus = document.getElementById("calcZeus");
     var cSave = document.getElementById("calcSave");
-    var COMPRESSION = 0.65; /* сжатие контекста −35% */
+    var COMPRESSION = 0.65;
+
+    calcModel.innerHTML = PRICE_ROWS.map(function (row) {
+      var value = row.input + "|" + row.input + "|" + row.id;
+      var label = row.id + " — ваш текст " + price(row.input) + " · ответ " + price(row.output);
+      return '<option value="' + value + '">' + label + "</option>";
+    }).join("");
+    var defaultModel = PRICE_ROWS.find(function (row) { return row.id === "claude-sonnet-5"; });
+    if (defaultModel) calcModel.value = defaultModel.input + "|" + defaultModel.input + "|" + defaultModel.id;
 
     function rub(v) {
       return Math.round(v).toLocaleString("ru-RU") + " ₽";
@@ -242,7 +251,7 @@
       var parts = calcModel.value.split("|");
       var other = mln * parseFloat(parts[0]);
       var zeus = mln * parseFloat(parts[1]) * COMPRESSION;
-      out.textContent = mln + " млн";
+      out.textContent = mln + " млн частей";
       cOther.innerHTML = rub(other) + '<i>/ мес</i>';
       cZeus.innerHTML = rub(zeus) + '<i>/ мес</i>';
       cSave.textContent = rub(Math.max(0, other - zeus) * 12);
@@ -366,7 +375,7 @@
         removeThinking(thinking);
         var message = "Демо временно недоступно. Попробуйте ещё раз позже.";
         if (/quota|insufficient|额度不足|квот|баланс/i.test(err.message)) {
-          message = "У демо закончилась квота моделей. Сервер подключён, но требуется пополнить баланс A6.";
+          message = "У демо закончился лимит. Попробуйте ещё раз позже.";
         } else if (err.status === 429) {
           message = "Лимит демо-запросов исчерпан. Попробуйте завтра.";
         } else if (err.status === 504) {

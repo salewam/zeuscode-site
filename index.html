@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ZeusCode — единый API для coding AI</title>
-<meta name="description" content="18 ключевых A6-моделей через один OpenAI-совместимый API. Цены рассчитаны из себестоимости A6 ×15, отдельно для input и output.">
+<meta name="description" content="ZeusCode помогает писать, объяснять и проверять код в одном месте. Платите только за использование.">
 <meta name="theme-color" content="#0d1117">
 <link rel="canonical" href="https://salewam.github.io/zeuscode-site/">
 <meta property="og:title" content="ZeusCode — единый API для coding AI">
-<meta property="og:description" content="18 ключевых A6-моделей в одном OpenAI-совместимом API. Прозрачный прайс: себестоимость A6 ×15.">
+<meta property="og:description" content="Пишите, объясняйте и проверяйте код в одном месте. Платите только за использование.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://salewam.github.io/zeuscode-site/">
 <meta property="og:image" content="https://salewam.github.io/zeuscode-site/assets/og.png">
@@ -18,7 +18,7 @@
 <meta property="og:site_name" content="ZeusCode">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="ZeusCode — единый API для coding AI">
-<meta name="twitter:description" content="18 ключевых A6-моделей в одном OpenAI-совместимом API. Прайс рассчитан по себестоимости A6 ×15.">
+<meta name="twitter:description" content="Пишите, объясняйте и проверяйте код в одном месте. Платите только за использование.">
 <meta name="twitter:image" content="https://salewam.github.io/zeuscode-site/assets/og.png">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%230d1117'/%3E%3Cpath d='M13 3 5 14h6l-1 8 8-11h-6z' fill='%237dd3fc'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,7 +35,7 @@
       "applicationCategory": "DeveloperApplication",
       "operatingSystem": "Web, CLI, IDE",
       "url": "https://salewam.github.io/zeuscode-site/",
-      "description": "Единый OpenAI-совместимый API для 18 ключевых A6-моделей с ценой из себестоимости A6 ×15 и оплатой по фактическому расходу.",
+      "description": "Помощник для работы с кодом: пишет, объясняет и проверяет код. Оплата только за использование.",
       "offers": {
         "@type": "Offer",
         "price": "4.55",
@@ -131,7 +131,7 @@
       <span class="line">Выбирает модель, режет токены, запускает 3 AI на сложное</span>
     </h1>
     <p class="hero__sub reveal" data-d="2">
-      18 ключевых A6-моделей через один endpoint. Внутри: автороутинг, удаление дублей, маскировка секретов и умное сжатие контекста. Длинные сессии держатся, токены экономятся, важное не теряется.
+      18 помощников для кода в одном месте. Пишите код, находите ошибки и разбирайтесь в сложных задачах без лишних настроек.
     </p>
     <div class="hero__actions reveal" data-d="3">
       <a href="#start" class="btn btn--primary btn--lg">Получить API-ключ<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
@@ -286,21 +286,19 @@
     <div class="section-head reveal">
       <p class="eyebrow">Публичный прайс</p>
       <h2>Все модели, <span class="grad-text">одна линейка цен</span></h2>
-      <p class="lead">18 моделей из актуального A6-прайса. Ниже — клиентская цена за 1 млн токенов: отдельно за входящие и исходящие. Без подписки и без скрытых пакетов.</p>
     </div>
     <div class="price-board reveal" data-d="1">
       <div class="price-board__meta">
         <span><b>18</b> моделей в прайсе</span>
-        <span>₽ / 1 млн токенов</span>
-        <span>себестоимость A6 × 15 · источник от 15.08.2026</span>
+        <span>₽ / 1 млн частей текста</span>
       </div>
       <div class="table-wrap table-wrap--prices">
         <table class="price-table">
           <thead>
             <tr>
               <th scope="col">Модель</th>
-              <th scope="col">Input / 1M</th>
-              <th scope="col">Output / 1M</th>
+              <th scope="col">Ваш текст / 1 млн</th>
+              <th scope="col">Ответ / 1 млн</th>
               <th scope="col">Статус</th>
             </tr>
           </thead>
@@ -316,28 +314,21 @@
       </div>
       <div class="calc__controls">
         <label class="calc__field">
-          <span class="calc__lbl">Токенов в месяц <output id="calcTokensOut">30 млн</output></span>
-          <input id="calcTokens" type="range" min="1" max="200" step="1" value="30" aria-label="Токенов в месяц, млн">
+          <span class="calc__lbl">Объём текста в месяц <output id="calcTokensOut">30 млн частей</output></span>
+          <input id="calcTokens" type="range" min="1" max="200" step="1" value="30" aria-label="Объём текста в месяц, млн частей">
         </label>
         <label class="calc__field">
-            <span class="calc__lbl">Основная модель</span>
-          <select id="calcModel" aria-label="Основная модель">
-            <option value="24.84|24.84" selected>claude-sonnet-5</option>
-            <option value="33.13|33.13">claude-sonnet-4-6</option>
-            <option value="66.25|66.25">claude-opus-5</option>
-            <option value="57.97|57.97">gemini-3.7-flash</option>
-            <option value="4.55|4.55">gpt-5.6-luna</option>
-          </select>
+            <span class="calc__lbl">Выберите помощника</span>
+          <select id="calcModel" aria-label="Выберите помощника"></select>
         </label>
       </div>
       <div class="calc__out">
-        <div class="calc__cell"><span>По тарифу без сжатия</span><b id="calcOther">—</b></div>
-        <div class="calc__cell"><span>После сжатия контекста</span><b id="calcZeus" class="calc__zeus">—</b></div>
+        <div class="calc__cell"><span>Без экономии текста</span><b id="calcOther">—</b></div>
+        <div class="calc__cell"><span>С экономией текста</span><b id="calcZeus" class="calc__zeus">—</b></div>
         <div class="calc__cell"><span>Разница за год</span><b id="calcSave" class="calc__save">—</b></div>
       </div>
-      <p class="calc__note">Иллюстрация по цене входящих токенов при уменьшении контекста на 35%. Фактический расход зависит от выбранной модели, запроса и настроек контекста.</p>
+      <p class="calc__note">Примерный расчёт для выбранного помощника. Итоговая сумма зависит от объёма вашего текста и ответа.</p>
     </div>
-    <p class="table-note reveal">Указаны клиентские ставки за 1 млн токенов. Полный актуальный каталог и доступность моделей проверяются через API.</p>
   </div>
 </section>
 <!-- ============ IDE ============ -->
@@ -428,7 +419,7 @@
         <a href="#top" class="logo">
           <span class="logo__mark"><svg><use href="#i-bolt"/></svg></span>Zeus<span class="grad-text">Code</span>
         </a>
-        <p class="footer__about">Единый OpenAI-совместимый API для coding AI. 18 ключевых A6-моделей, маршрутизация под задачу и оплата за фактический расход.</p>
+        <p class="footer__about">Помощник для работы с кодом. Выбирайте нужный вариант и платите только за использование.</p>
       </div>
       <div>
         <h4>Продукт</h4>
@@ -459,12 +450,12 @@
     </div>
     <div class="footer__bottom">
       <span>© 2026 ZeusCode. Все права защищены.</span>
-      <span>Цены указаны за 1 млн токенов и могут меняться вместе с курсом.</span>
+      <span>Цены могут меняться вместе с курсом.</span>
     </div>
   </div>
 </footer>
 
-<script src="js/app.js?v=20260911-nav2" defer></script>
+<script src="js/app.js?v=20260911-copy3" defer></script>
 <script type="module" src="js/globe-boot.js?v=1788697656"></script>
 </body>
 </html>
