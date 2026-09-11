@@ -148,20 +148,13 @@ p { margin: 0; }
 .logo__mark svg { width: 15px; height: 15px; }
 .nav { display: flex; gap: 18px; margin-left: auto; font-size: 13.5px; color: var(--muted); }
 .nav a {
-  position: relative; width: 6px; height: 6px; border-radius: 50%;
-  background: currentColor; opacity: 0.65; transition: color 0.2s, opacity 0.2s, transform 0.2s;
+  position: relative; padding: 6px 0; opacity: 0.8;
+  transition: color 0.2s, opacity 0.2s;
 }
-.nav a::before {
-  content: attr(data-label); position: absolute; right: 0; bottom: 15px;
-  padding: 5px 8px; border: 1px solid var(--stroke); border-radius: var(--r-sm);
-  background: var(--bg-3); color: var(--text); font-size: 11px; line-height: 1;
-  white-space: nowrap; opacity: 0; pointer-events: none; transform: translateY(3px);
-  transition: opacity 0.18s, transform 0.18s;
-}
-.nav a:hover, .nav a.is-active { color: var(--bolt); opacity: 1; transform: scale(1.35); }
-.nav a:hover::before { opacity: 1; transform: translateY(0); }
+.nav a:hover, .nav a.is-active { color: var(--bolt); opacity: 1; }
 .nav a.is-active::after {
-  content: ""; position: absolute; inset: -5px; border: 1px solid var(--bolt-line); border-radius: 50%;
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px;
+  border-radius: 0; background: var(--bolt);
 }
 .header__cta { display: flex; gap: 10px; align-items: center; }
 .burger { display: none; }
@@ -624,11 +617,6 @@ td.zeus { color: var(--text); font-weight: 500; font-family: var(--code); font-v
   .nav.is-open a {
     width: auto; height: auto; padding: 11px 12px; border-radius: var(--r-sm);
     background: none; opacity: 1; transform: none;
-  }
-  .nav.is-open a::before {
-    position: static; display: block; content: attr(data-label); padding: 0;
-    border: 0; border-radius: 0; background: none; color: inherit;
-    font-size: 15.5px; line-height: 1.6; opacity: 1; transform: none;
   }
   .nav.is-open a.is-active::after { inset: auto 12px 4px; height: 1px; border: 0; border-radius: 0; background: var(--bolt); }
   .nav.is-open a:active { background: var(--surface-2); }
