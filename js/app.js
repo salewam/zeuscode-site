@@ -24,6 +24,51 @@
     { n: "kimi-k3", i: "i-kimi" }
   ];
 
+  var PRICE_ROWS = [
+    { id: "gpt-5.3-codex", icon: "i-openai", input: 4637.99, output: 37103.32, ready: false },
+    { id: "gpt-4o", icon: "i-openai", input: 5465.38, output: 21846.49, ready: false },
+    { id: "qwen3.6-27b", icon: "i-qwen", input: 1528.56, output: 16299.24, ready: true },
+    { id: "qwen3.7-max", icon: "i-qwen", input: 4140.83, output: 12419.40, ready: true },
+    { id: "mimo-v2.5-pro", icon: "i-bolt", input: 1446.92, output: 10735.51, ready: true },
+    { id: "claude-fable-5", icon: "i-claude", input: 1987.67, output: 9946.37, ready: true },
+    { id: "claude-opus-4-7", icon: "i-claude", input: 1903.94, output: 9421.31, ready: false },
+    { id: "kimi-k2.7-code", icon: "i-kimi", input: 1987.75, output: 9043.94, ready: true },
+    { id: "mimo-v2.5", icon: "i-bolt", input: 1544.49, output: 7761.72, ready: true },
+    { id: "claude-opus-4-8", icon: "i-claude", input: 1407.65, output: 7049.11, ready: true },
+    { id: "claude-opus-4-6", icon: "i-claude", input: 1242.44, output: 6212.72, ready: true },
+    { id: "glm-5.1", icon: "i-glm", input: 1622.83, output: 5688.49, ready: true },
+    { id: "claude-opus-5", icon: "i-claude", input: 1075.23, output: 5323.75, ready: true },
+    { id: "gemini-3-pro-preview", icon: "i-gemini", input: 695.75, output: 4161.35, ready: true },
+    { id: "qwen3.7-plus", icon: "i-qwen", input: 993.90, output: 3969.49, ready: true },
+    { id: "gpt-5.3-codex-spark", icon: "i-openai", input: 479.81, output: 3845.69, ready: true },
+    { id: "gemini-3.6-flash", icon: "i-gemini", input: 695.88, output: 3482.51, ready: true },
+    { id: "gemini-3.5-flash", icon: "i-gemini", input: 529.63, output: 3181.25, ready: true },
+    { id: "gemini-3.5-flash-high", icon: "i-gemini", input: 530.33, output: 3181.05, ready: true },
+    { id: "kimi-k2.5", icon: "i-kimi", input: 903.73, output: 2456.19, ready: true },
+    { id: "codex-auto-review", icon: "i-openai", input: 382.60, output: 2292.79, ready: true },
+    { id: "grok-4.3", icon: "i-grok", input: 2846.05, output: 2146.27, ready: true },
+    { id: "claude-sonnet-4-6", icon: "i-claude", input: 331.35, output: 1642.72, ready: true },
+    { id: "claude-sonnet-5", icon: "i-claude", input: 280.67, output: 1387.36, ready: true },
+    { id: "gpt-5.4-mini", icon: "i-openai", input: 191.52, output: 1341.90, ready: true },
+    { id: "minimax-m2.5", icon: "i-bolt", input: 331.42, output: 1333.74, ready: true },
+    { id: "gpt-4o-mini", icon: "i-openai", input: 331.24, output: 1332.41, ready: true },
+    { id: "gpt-5.4", icon: "i-openai", input: 441.66, output: 1154.02, ready: true },
+    { id: "claude-haiku-4-5-20251001", icon: "i-claude", input: 218.33, output: 1107.66, ready: true },
+    { id: "minimax-m3", icon: "i-bolt", input: 247.79, output: 967.87, ready: true },
+    { id: "glm-5.2", icon: "i-glm", input: 248.83, output: 865.96, ready: true },
+    { id: "claude-haiku-4-5", icon: "i-claude", input: 140.74, output: 710.09, ready: true },
+    { id: "studio-premium", name: "ZeusCode Studio Premium", icon: "i-bolt", input: 117.32, output: 590.05, ready: true },
+    { id: "studio-ultra", name: "ZeusCode Studio Ultra", icon: "i-bolt", input: 69.01, output: 483.08, ready: true },
+    { id: "deepseek-v4-flash", icon: "i-deepseek", input: 231.67, output: 478.02, ready: true },
+    { id: "studio-standard", name: "ZeusCode Studio Стандарт", icon: "i-bolt", input: 52.45, output: 414.07, ready: true },
+    { id: "zeuscode", name: "ZeusCode", icon: "i-bolt", input: 55.21, output: 345.06, ready: true },
+    { id: "deepseek-v4-pro", icon: "i-deepseek", input: 165.49, output: 340.92, ready: true },
+    { id: "gemini-2.5-flash", icon: "i-gemini", input: 34.52, output: 295.79, ready: true },
+    { id: "studio-light", name: "ZeusCode Studio Лайт", icon: "i-bolt", input: 12.42, output: 103.52, ready: true },
+    { id: "ultra-mode", name: "ZeusCode Ultra", icon: "i-bolt", input: 12.42, output: 103.52, ready: true },
+    { id: "deepseek-chat", icon: "i-deepseek", input: 38.65, output: 57.97, ready: true }
+  ];
+
   function chip(m) {
     return '<span class="chip"><svg><use href="#' + m.i + '"/></svg>' + m.n + "</span>";
   }
@@ -36,6 +81,29 @@
 
   fillTrack(document.getElementById("track1"), MODELS.slice(0, 10));
   fillTrack(document.getElementById("track2"), MODELS.slice(10));
+
+  /* ---------- public price table ---------- */
+  var priceRows = document.getElementById("priceRows");
+  if (priceRows) {
+    var priceFormatter = new Intl.NumberFormat("ru-RU", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    function price(value) {
+      return priceFormatter.format(value) + " ₽";
+    }
+    priceRows.innerHTML = PRICE_ROWS.map(function (row, index) {
+      var rowClass = row.ready ? "" : " class=\"is-limited\"";
+      var label = row.name || row.id;
+      var statusClass = row.ready ? "price-status--ready" : "price-status--limited";
+      var status = row.ready ? "Доступна" : "Ограничена";
+      return "<tr" + rowClass + ">" +
+        "<th scope=\"row\" class=\"price-model\"><span class=\"price-rank\">" + String(index + 1).padStart(2, "0") + "</span>" +
+        "<svg aria-hidden=\"true\"><use href=\"#" + row.icon + "\"></use></svg>" +
+        "<span><strong>" + label + "</strong><small>" + row.id + "</small></span></th>" +
+        "<td class=\"price-value\" data-label=\"Input / 1M\">" + price(row.input) + "</td>" +
+        "<td class=\"price-value price-value--strong\" data-label=\"Output / 1M\">" + price(row.output) + "</td>" +
+        "<td data-label=\"Статус\"><span class=\"price-status " + statusClass + "\">" + status + "</span></td>" +
+        "</tr>";
+    }).join("");
+  }
 
   /* ---------- sticky header ---------- */
   var header = document.getElementById("header");

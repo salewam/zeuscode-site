@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ZeusCode — единый API для coding AI</title>
-<meta name="description" content="41 coding AI-модель через один OpenAI-совместимый API. Выбирайте модель под задачу, платите за токены по факту и продолжайте работу при сбоях.">
+<meta name="description" content="42 coding AI-модели с подтверждёнными ставками через один OpenAI-совместимый API. Выбирайте модель под задачу и платите за токены по факту.">
 <meta name="theme-color" content="#0d1117">
 <link rel="canonical" href="https://salewam.github.io/zeuscode-site/">
 <meta property="og:title" content="ZeusCode — единый API для coding AI">
-<meta property="og:description" content="16 моделей в одном OpenAI-совместимом API: Solo для обычных задач, Crew для сложных, настройка через Telegram mini-app и оплата по факту.">
+<meta property="og:description" content="42 coding AI-модели в одном OpenAI-совместимом API, единый прайс за 1 млн токенов и оплата по факту.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://salewam.github.io/zeuscode-site/">
 <meta property="og:image" content="https://salewam.github.io/zeuscode-site/assets/og.png">
@@ -18,7 +18,7 @@
 <meta property="og:site_name" content="ZeusCode">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="ZeusCode — единый API для coding AI">
-<meta name="twitter:description" content="16 моделей в одном OpenAI-совместимом API. Solo и Crew, настройка через Telegram mini-app и оплата по фактическому расходу.">
+<meta name="twitter:description" content="42 coding AI-модели в одном OpenAI-совместимом API. Единый прайс и оплата по фактическому расходу.">
 <meta name="twitter:image" content="https://salewam.github.io/zeuscode-site/assets/og.png">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%230d1117'/%3E%3Cpath d='M13 3 5 14h6l-1 8 8-11h-6z' fill='%237dd3fc'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,12 +35,12 @@
       "applicationCategory": "DeveloperApplication",
       "operatingSystem": "Web, CLI, IDE",
       "url": "https://salewam.github.io/zeuscode-site/",
-      "description": "Единый OpenAI-совместимый API для 41 coding AI-модели с режимами Solo и Crew, настройкой через Telegram mini-app и оплатой по фактическому расходу.",
+      "description": "Единый OpenAI-совместимый API для 42 coding AI-моделей с единым прайсом и оплатой по фактическому расходу.",
       "offers": {
         "@type": "Offer",
-        "price": "30",
+        "price": "12.42",
         "priceCurrency": "RUB",
-        "description": "от 30 ₽ за 1 млн входящих токенов, без подписки"
+        "description": "от 12,42 ₽ за 1 млн входящих токенов, без подписки"
       }
     },
     {
@@ -130,7 +130,7 @@
       <span class="line">Выбирает модель, режет токены, запускает 3 AI на сложное</span>
     </h1>
     <p class="hero__sub reveal" data-d="2">
-      16 моделей через один endpoint. Внутри: автороутинг, удаление дублей, маскировка секретов и умное сжатие контекста. Длинные сессии держатся, токены экономятся, важное не теряется.
+      42 модели с подтверждёнными ставками через один endpoint. Внутри: автороутинг, удаление дублей, маскировка секретов и умное сжатие контекста. Длинные сессии держатся, токены экономятся, важное не теряется.
     </p>
     <div class="hero__actions reveal" data-d="3">
       <a href="#start" class="btn btn--primary btn--lg">Получить API-ключ<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
@@ -283,54 +283,29 @@
 <section class="section" id="pricing">
   <div class="wrap">
     <div class="section-head reveal">
-      <p class="eyebrow">Цены под сценарий</p>
-      <h2>Выбирайте уровень, <span class="grad-text">платите по факту</span></h2>
-      <p class="lead">Уровень — это сценарий выбора, а не подписка. Ставки ниже относятся к 1 млн входящих токенов, зависят от модели и могут меняться.</p>
+      <p class="eyebrow">Публичный прайс</p>
+      <h2>Все модели, <span class="grad-text">одна линейка цен</span></h2>
+      <p class="lead">42 модели с подтверждённой ставкой. Ниже — цена для клиента за 1 млн токенов: отдельно за входящие и исходящие. Сортировка по output — от дорогих к дешёвым, без тарифных классов.</p>
     </div>
-    <div class="tiers">
-      <div class="tier reveal" data-d="1">
-        <div class="tier__name">Economy</div>
-        <div class="tier__price">от 1 ₽<span>за 1 млн токенов</span></div>
-        <p class="tier__desc">Небольшие правки, черновики и тестовые прогоны, где важна стоимость входа.</p>
-        <ul class="tier__models">
-          <li><svg><use href="#i-grok"/></svg>grok-4.6 <b>1.5 ₽</b></li>
-          <li><svg><use href="#i-openai"/></svg>gpt-5.6-luna <b>1 ₽</b></li>
-          <li><svg><use href="#i-grok"/></svg>grok-4.5 <b>1.9 ₽</b></li>
-          <li><svg><use href="#i-glm"/></svg>glm-5.2 <b>3.7 ₽</b></li>
-        </ul>
+    <div class="price-board reveal" data-d="1">
+      <div class="price-board__meta">
+        <span><b>42</b> модели в прайсе</span>
+        <span>₽ / 1 млн токенов</span>
+        <span>обновлено по каталогу 07.09.2026</span>
       </div>
-      <div class="tier tier--hot reveal" data-d="2">
-        <div class="tier__name">Standard</div>
-        <div class="tier__price">от 5.6 ₽<span>за 1 млн токенов</span></div>
-        <p class="tier__desc">Ежедневный кодинг, объяснения, рефакторинг и рабочие итерации.</p>
-        <ul class="tier__models">
-          <li><svg><use href="#i-claude"/></svg>claude-sonnet-5 <b>5.6 ₽</b></li>
-          <li><svg><use href="#i-openai"/></svg>gpt-4o-mini <b>7.4 ₽</b></li>
-          <li><svg><use href="#i-claude"/></svg>claude-sonnet-4-6 <b>7.4 ₽</b></li>
-          <li><svg><use href="#i-openai"/></svg>gpt-5.6-terra <b>6.5 ₽</b></li>
-        </ul>
-      </div>
-      <div class="tier reveal" data-d="3">
-        <div class="tier__name">Premium</div>
-        <div class="tier__price">от 13 ₽<span>за 1 млн токенов</span></div>
-        <p class="tier__desc">Архитектурные решения и код, где нужен более глубокий разбор.</p>
-        <ul class="tier__models">
-          <li><svg><use href="#i-gemini"/></svg>gemini-3.7-flash <b>13 ₽</b></li>
-          <li><svg><use href="#i-gemini"/></svg>gemini-3.6-flash <b>13 ₽</b></li>
-          <li><svg><use href="#i-claude"/></svg>claude-opus-5 <b>14.9 ₽</b></li>
-          <li><svg><use href="#i-openai"/></svg>gpt-5.6-sol <b>13 ₽</b></li>
-        </ul>
-      </div>
-      <div class="tier reveal" data-d="4">
-        <div class="tier__name">Ultra</div>
-        <div class="tier__price">от 26.7 ₽<span>за 1 млн токенов</span></div>
-        <p class="tier__desc">Самые требовательные задачи и Crew-режим из трёх AI.</p>
-        <ul class="tier__models">
-          <li><svg><use href="#i-claude"/></svg>claude-fable-5 <b>26.7 ₽</b></li>
-          <li><svg><use href="#i-deepseek"/></svg>deepseek-v4-pro <b>33.5 ₽</b></li>
-          <li><svg><use href="#i-kimi"/></svg>kimi-k3 <b>33.5 ₽</b></li>
-          <li><svg><use href="#i-gemini"/></svg>gemini-3.5-flash <b>13 ₽</b></li>
-        </ul>
+      <div class="table-wrap table-wrap--prices">
+        <table class="price-table">
+          <thead>
+            <tr>
+              <th scope="col">Модель</th>
+              <th scope="col">Input / 1M</th>
+              <th scope="col">Output / 1M</th>
+              <th scope="col">Статус</th>
+            </tr>
+          </thead>
+          <tbody id="priceRows"></tbody>
+        </table>
+        <noscript><p class="price-noscript">Включите JavaScript, чтобы увидеть полный прайс моделей.</p></noscript>
       </div>
     </div>
     <div class="calc reveal" data-d="2">
@@ -361,7 +336,7 @@
       </div>
       <p class="calc__note">Пример расчёта по цене входящих токенов. Фактический расход зависит от выбранной модели, запроса и настроек контекста; актуальные ставки видны в кабинете.</p>
     </div>
-    <p class="table-note reveal">Указана цена входящих токенов. Полный прайс — в кабинете. Курс фиксируется в момент пополнения.</p>
+    <p class="table-note reveal">Это цены для клиента, а не себестоимость A6. Модели без подтверждённой ставки не выдаются как «бесплатные» и в таблицу не включены; цены могут меняться вместе с upstream-каталогом.</p>
   </div>
 </section>
 <!-- ============ IDE ============ -->
@@ -452,7 +427,7 @@
         <a href="#top" class="logo">
           <span class="logo__mark"><svg><use href="#i-bolt"/></svg></span>Zeus<span class="grad-text">Code</span>
         </a>
-        <p class="footer__about">Единый OpenAI-совместимый API для coding AI. 16 моделей, маршрутизация под задачу и оплата за фактический расход.</p>
+        <p class="footer__about">Единый OpenAI-совместимый API для coding AI. 42 модели с подтверждёнными ставками, маршрутизация под задачу и оплата за фактический расход.</p>
       </div>
       <div>
         <h4>Продукт</h4>

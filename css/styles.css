@@ -405,6 +405,53 @@ td.zeus { color: var(--text); font-weight: 500; font-family: var(--code); font-v
 .delta--neutral { background: var(--surface-2); color: var(--muted); }
 .table-note { margin-top: 16px; font-size: 13px; color: var(--dim); }
 
+/* ================== public price board ================== */
+.price-board {
+  border: 1px solid var(--stroke); border-radius: var(--r-lg); background: var(--bg-2);
+  overflow: hidden; box-shadow: var(--shadow);
+}
+.price-board__meta {
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px 24px;
+  padding: 16px 20px; border-bottom: 1px solid var(--stroke); color: var(--dim);
+  font: 11.5px var(--code); letter-spacing: .02em; text-transform: uppercase;
+}
+.price-board__meta b { color: var(--bolt-text); font-weight: 500; }
+.table-wrap--prices { border: 0; border-radius: 0; }
+.price-table { font-size: 14px; }
+.price-table thead th { padding-top: 13px; padding-bottom: 13px; }
+.price-table thead th:nth-child(2),
+.price-table thead th:nth-child(3),
+.price-table thead th:nth-child(4),
+.price-table td:nth-child(2),
+.price-table td:nth-child(3),
+.price-table td:nth-child(4) { width: 18%; }
+.price-table thead th:first-child { width: 46%; }
+.price-table tbody th.price-model {
+  display: flex; align-items: center; gap: 12px; padding: 13px 20px; border-bottom: 1px solid var(--stroke);
+  color: var(--text); text-align: left; font-weight: 500;
+}
+.price-model > svg { width: 20px; height: 20px; flex: none; }
+.price-model > span:last-child { min-width: 0; }
+.price-model strong, .price-model small { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.price-model strong { font-size: 14px; font-weight: 600; }
+.price-model small { margin-top: 1px; color: var(--dim); font: 11px var(--code); }
+.price-rank {
+  width: 25px; flex: none; color: var(--dim); font: 11px var(--code); font-variant-numeric: tabular-nums;
+}
+.price-table tbody td { padding: 13px 20px; }
+.price-value { color: var(--muted); font: 13px var(--code); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.price-value--strong { color: var(--text); font-weight: 600; }
+.price-status {
+  display: inline-flex; align-items: center; gap: 6px; padding: 4px 8px; border-radius: 999px;
+  font-size: 11px; white-space: nowrap;
+}
+.price-status::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+.price-status--ready { color: var(--green); background: rgba(63,185,80,.1); }
+.price-status--limited { color: var(--dim); background: var(--surface-2); }
+.price-table tbody tr.is-limited { opacity: .7; }
+.price-table tbody tr.is-limited:hover { opacity: 1; }
+.price-noscript { padding: 20px; color: var(--muted); }
+
 /* ================== IDE ================== */
 .ide-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
 .ide {
@@ -607,6 +654,18 @@ td.zeus { color: var(--text); font-weight: 500; font-family: var(--code); font-v
   td.model { font-size: 16px; margin-bottom: 8px; padding-bottom: 0; justify-content: flex-start; }
   td.model::before { content: none; }
   tbody td::before { font-weight: 500; }
+  .price-board__meta { align-items: flex-start; flex-direction: column; gap: 5px; padding: 15px 18px; }
+  .price-table tbody tr { padding: 15px 18px; }
+  .price-table tbody th.price-model {
+    display: flex; width: 100%; padding: 0 0 10px; border: 0; font-size: 16px;
+  }
+  .price-table .price-model strong { font-size: 15px; }
+  .price-table tbody td { width: 100%; padding: 5px 0; }
+  .price-table tbody td::before { content: attr(data-label); }
+  .price-table tbody td.price-value { justify-content: space-between; }
+  .price-table tbody td[data-label="Статус"] { padding-top: 9px; }
+  .price-table tbody td[data-label="Статус"]::before { content: attr(data-label); }
+  .price-table .price-rank { width: 24px; }
   .footer__grid { grid-template-columns: 1fr; gap: 30px; }
   .hero__actions .btn, .cta__actions .btn { width: 100%; }
   .hero__badge { font-size: 12px; padding: 7px 8px 7px 12px; text-align: left; }
