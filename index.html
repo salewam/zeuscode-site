@@ -24,7 +24,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css?v=20260911-nav3">
+<link rel="stylesheet" href="css/styles.css?v=20260912-terminal1">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -126,16 +126,54 @@
 <main id="top">
 <section class="hero">
   <div class="wrap">
-    <h1 class="reveal" data-d="1">
-      <span class="line grad-text">Кодишь — система думает за тебя</span>
-      <span class="line">Выбирает модель, режет токены, запускает 3 AI на сложное</span>
-    </h1>
-    <p class="hero__sub reveal" data-d="2">
-      18 помощников для кода в одном месте. Пишите код, находите ошибки и разбирайтесь в сложных задачах без лишних настроек.
-    </p>
-    <div class="hero__actions reveal" data-d="3">
-      <a href="#start" class="btn btn--primary btn--lg">Получить API-ключ<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      <a href="#how" class="btn btn--ghost btn--lg">Как это работает</a>
+    <div class="hero__layout">
+      <div class="hero__copy">
+        <div class="hero__badge reveal" data-d="1">
+          <span class="pill">DEV API</span>
+          <b>18 моделей для кода</b>
+          <span>один ключ</span>
+        </div>
+        <h1 class="reveal" data-d="2">
+          <span class="line grad-text">Кодишь — система думает за тебя</span>
+          <span class="line">Пишет и проверяет код</span>
+        </h1>
+        <p class="hero__sub reveal" data-d="3">
+          Подключите привычный редактор, выберите помощника и работайте с кодом без лишних переключений.
+        </p>
+        <div class="hero__actions reveal" data-d="4">
+          <a href="#start" class="btn btn--primary btn--lg">Получить API-ключ<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a href="#how" class="btn btn--ghost btn--lg">Как это работает</a>
+        </div>
+        <ul class="hero__checks reveal" data-d="4">
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Без обязательной подписки</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Оплата по использованию</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Работает в привычных IDE</li>
+        </ul>
+      </div>
+
+      <div class="hero__visual reveal" data-d="2">
+        <div class="codewin codewin--hero">
+          <div class="codewin__bar">
+            <span class="codewin__dot"></span><span class="codewin__dot"></span><span class="codewin__dot"></span>
+            <span class="codewin__title">quickstart.py</span>
+            <button class="codewin__copy" type="button" data-copy aria-label="Скопировать пример запроса"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>Копировать</span></button>
+          </div>
+          <pre aria-label="Пример подключения ZeusCode"><code><span class="tok-c"># Подключение через привычный SDK</span>
+<span class="tok-k">from</span> openai <span class="tok-k">import</span> OpenAI
+
+client = OpenAI(
+    base_url=<span class="tok-s">"https://api.zeuscode.ru/v1"</span>,
+    api_key=<span class="tok-s">"ваш-ключ"</span>,
+)
+
+answer = client.chat.completions.create(
+    model=<span class="tok-s">"claude-sonnet-5"</span>,
+    messages=[{<span class="tok-s">"role"</span>: <span class="tok-s">"user"</span>, <span class="tok-s">"content"</span>: <span class="tok-s">"Проверь этот код"</span>}],
+)</code></pre>
+          <div class="codewin__status"><span class="codewin__status-dot"></span><span>Готово к запросу</span><span class="codewin__status-separator">·</span><span class="codewin__status-model">claude-sonnet-5</span></div>
+        </div>
+        <div class="hero__visual-note"><span class="hero__visual-line"></span><span>Один адрес для всех моделей</span><code>/v1</code></div>
+      </div>
     </div>
 
     <div class="hero__stats reveal">
@@ -147,7 +185,7 @@
   </div>
 </section>
 <!-- ============ MODELS MARQUEE ============ -->
-<section class="section section--tight" id="models">
+<section class="section section--tight models-section" id="models">
   <div class="wrap">
     <div class="section-head center reveal">
       <p class="eyebrow">Выбор без переключений</p>
@@ -203,7 +241,7 @@
       <h2>Всё нужное для <span class="grad-text">работы с ИИ</span></h2>
       <p class="lead">Подключайте привычные инструменты, выбирайте модель и контролируйте расходы — всё в одном месте.</p>
     </div>
-    <div class="grid grid--3">
+    <div class="grid grid--3 feature-grid">
       <article class="card reveal" data-d="1">
         <div class="card__icon"><svg><use href="#i-route"/></svg></div>
         <h3>Один ключ ко всем моделям</h3>
@@ -455,7 +493,7 @@
   </div>
 </footer>
 
-<script src="js/app.js?v=20260911-copy3" defer></script>
+<script src="js/app.js?v=20260912-copy4" defer></script>
 <script type="module" src="js/globe-boot.js?v=1788697656"></script>
 </body>
 </html>

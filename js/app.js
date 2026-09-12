@@ -192,18 +192,39 @@
   }
 
   /* ---------- copy code snippet ---------- */
+  function copyText(text) {
+    function fallback() {
+      var area = document.createElement("textarea");
+      area.value = text;
+      area.setAttribute("readonly", "");
+      area.style.position = "fixed";
+      area.style.opacity = "0";
+      document.body.appendChild(area);
+      area.select();
+      var copied = false;
+      try { copied = document.execCommand("copy"); } catch (err) { copied = false; }
+      document.body.removeChild(area);
+      return copied ? Promise.resolve() : Promise.reject(new Error("Copy unavailable"));
+    }
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      return navigator.clipboard.writeText(text).catch(fallback);
+    }
+    return fallback();
+  }
+
   document.querySelectorAll("[data-copy]").forEach(function (btn) {
     var label = btn.querySelector("span");
     var pre = btn.closest(".codewin").querySelector("pre");
     btn.addEventListener("click", function () {
-      navigator.clipboard.writeText(pre.innerText).then(function () {
+      copyText(pre.innerText).then(function () {
         btn.classList.add("is-done");
         label.textContent = "Скопировано";
         setTimeout(function () {
           btn.classList.remove("is-done");
           label.textContent = "Копировать";
         }, 1800);
-      });
+      }).catch(function () { label.textContent = "Скопируйте вручную"; });
     });
   });
 
