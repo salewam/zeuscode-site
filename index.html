@@ -107,8 +107,8 @@
     <nav class="nav" id="nav" aria-label="Разделы страницы">
       <a href="#top">Главная</a>
       <a href="#models">Модели</a>
-      <a href="#features">Возможности</a>
       <a href="#how">Как работает</a>
+      <a href="#features">Возможности</a>
       <a href="#pricing">Цены</a>
       <a href="#faq">FAQ</a>
     </nav>
@@ -210,6 +210,34 @@
     </div>
   </div>
 </section>
+<!-- ============ HOW IT WORKS ============ -->
+<section class="section" id="how">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Как это работает</p>
+      <h2>Проверьте ответ <span class="grad-text">на своей задаче</span></h2>
+      <p class="lead">Напишите запрос — три модели обработают его вместе, а ZeusCode соберёт единый ответ.</p>
+    </div>
+
+    <div class="playground reveal" data-d="1">
+      <div class="chat-head">
+        <div class="chat-brand"><span class="chat-brand__mark">✦</span><div><strong>ZeusCode</strong><small>три модели в одной связке</small></div></div>
+        <div class="chat-models" aria-label="Модели работают вместе">
+          <span><svg><use href="#i-deepseek"/></svg>deepseek-v4-pro-0813</span>
+          <span><svg><use href="#i-glm"/></svg>glm-5.2</span>
+          <span><svg><use href="#i-kimi"/></svg>minimax-m3</span>
+        </div>
+      </div>
+      <div class="chat-body" id="demoResult" aria-live="polite">
+        <div class="chat-welcome"><div class="chat-welcome__icon">✦</div><h3>Чем помочь?</h3><p>Напишите задачу — модели вместе разберут её и соберут единый ответ.</p></div>
+      </div>
+      <form class="chat-form" id="demoForm">
+        <textarea id="demoPrompt" rows="2" maxlength="4000" placeholder="Напишите сообщение…"></textarea>
+        <div class="chat-form__bottom"><span><b id="demoQuota">999 млрд</b> запросов доступно</span><button class="chat-send" type="submit" id="demoSubmit" aria-label="Отправить запрос">↑</button></div>
+      </form>
+    </div>
+  </div>
+</section>
 <!-- ============ FEATURES ============ -->
 <section class="section" id="features">
   <div class="wrap">
@@ -264,34 +292,6 @@
         <h3>Привычные инструменты</h3>
         <p>Работайте в своём редакторе: для совместимых программ достаточно указать адрес и ключ.</p>
       </article>
-    </div>
-  </div>
-</section>
-<!-- ============ HOW IT WORKS ============ -->
-<section class="section" id="how">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <p class="eyebrow">Как это работает</p>
-      <h2>Проверьте ответ <span class="grad-text">на своей задаче</span></h2>
-      <p class="lead">Напишите запрос — три модели обработают его вместе, а ZeusCode соберёт единый ответ.</p>
-    </div>
-
-    <div class="playground reveal" data-d="1">
-      <div class="chat-head">
-        <div class="chat-brand"><span class="chat-brand__mark">✦</span><div><strong>ZeusCode</strong><small>три модели в одной связке</small></div></div>
-        <div class="chat-models" aria-label="Модели работают вместе">
-          <span><svg><use href="#i-deepseek"/></svg>deepseek-v4-pro-0813</span>
-          <span><svg><use href="#i-glm"/></svg>glm-5.2</span>
-          <span><svg><use href="#i-kimi"/></svg>minimax-m3</span>
-        </div>
-      </div>
-      <div class="chat-body" id="demoResult" aria-live="polite">
-        <div class="chat-welcome"><div class="chat-welcome__icon">✦</div><h3>Чем помочь?</h3><p>Напишите задачу — модели вместе разберут её и соберут единый ответ.</p></div>
-      </div>
-      <form class="chat-form" id="demoForm">
-        <textarea id="demoPrompt" rows="2" maxlength="4000" placeholder="Напишите сообщение…"></textarea>
-        <div class="chat-form__bottom"><span><b id="demoQuota">999 млрд</b> запросов доступно</span><button class="chat-send" type="submit" id="demoSubmit" aria-label="Отправить запрос">↑</button></div>
-      </form>
     </div>
   </div>
 </section>
