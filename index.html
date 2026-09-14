@@ -108,8 +108,8 @@
       <a href="#top">Главная</a>
       <a href="#models">Модели</a>
       <a href="#how">Как работает</a>
-      <a href="#features">Возможности</a>
       <a href="#pricing">Цены</a>
+      <a href="#features">Возможности</a>
       <a href="#faq">FAQ</a>
     </nav>
     <button class="burger" id="burger" aria-label="Меню" aria-expanded="false" aria-controls="nav">
@@ -238,6 +238,57 @@
     </div>
   </div>
 </section>
+<!-- ============ PRICING ============ -->
+<section class="section" id="pricing">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Публичный прайс</p>
+      <h2>Все модели, <span class="grad-text">одна линейка цен</span></h2>
+    </div>
+    <div class="price-board reveal" data-d="1">
+      <div class="price-board__meta">
+        <span><b>18</b> моделей в прайсе</span>
+        <span>₽ / 1 млн частей текста</span>
+      </div>
+      <div class="table-wrap table-wrap--prices">
+        <table class="price-table">
+          <thead>
+            <tr>
+              <th scope="col">Модель</th>
+              <th scope="col">Ваш текст / 1 млн</th>
+              <th scope="col">Ответ / 1 млн</th>
+              <th scope="col">Статус</th>
+            </tr>
+          </thead>
+          <tbody id="priceRows"></tbody>
+        </table>
+        <noscript><p class="price-noscript">Включите JavaScript, чтобы увидеть полный прайс моделей.</p></noscript>
+      </div>
+    </div>
+    <div class="calc reveal" data-d="2">
+      <div class="calc__head">
+        <p class="eyebrow">Калькулятор</p>
+        <h3>Сравните сценарий за минуту</h3>
+      </div>
+      <div class="calc__controls">
+        <label class="calc__field">
+          <span class="calc__lbl">Объём текста в месяц <output id="calcTokensOut">30 млн частей</output></span>
+          <input id="calcTokens" type="range" min="1" max="200" step="1" value="30" aria-label="Объём текста в месяц, млн частей">
+        </label>
+        <label class="calc__field">
+            <span class="calc__lbl">Выберите помощника</span>
+          <select id="calcModel" aria-label="Выберите помощника"></select>
+        </label>
+      </div>
+      <div class="calc__out">
+        <div class="calc__cell"><span>Без экономии текста</span><b id="calcOther">—</b></div>
+        <div class="calc__cell"><span>С экономией текста</span><b id="calcZeus" class="calc__zeus">—</b></div>
+        <div class="calc__cell"><span>Разница за год</span><b id="calcSave" class="calc__save">—</b></div>
+      </div>
+      <p class="calc__note">Примерный расчёт для выбранного помощника. Итоговая сумма зависит от объёма вашего текста и ответа.</p>
+    </div>
+  </div>
+</section>
 <!-- ============ FEATURES ============ -->
 <section class="section" id="features">
   <div class="wrap">
@@ -292,57 +343,6 @@
         <h3>Привычные инструменты</h3>
         <p>Работайте в своём редакторе: для совместимых программ достаточно указать адрес и ключ.</p>
       </article>
-    </div>
-  </div>
-</section>
-<!-- ============ PRICING ============ -->
-<section class="section" id="pricing">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <p class="eyebrow">Публичный прайс</p>
-      <h2>Все модели, <span class="grad-text">одна линейка цен</span></h2>
-    </div>
-    <div class="price-board reveal" data-d="1">
-      <div class="price-board__meta">
-        <span><b>18</b> моделей в прайсе</span>
-        <span>₽ / 1 млн частей текста</span>
-      </div>
-      <div class="table-wrap table-wrap--prices">
-        <table class="price-table">
-          <thead>
-            <tr>
-              <th scope="col">Модель</th>
-              <th scope="col">Ваш текст / 1 млн</th>
-              <th scope="col">Ответ / 1 млн</th>
-              <th scope="col">Статус</th>
-            </tr>
-          </thead>
-          <tbody id="priceRows"></tbody>
-        </table>
-        <noscript><p class="price-noscript">Включите JavaScript, чтобы увидеть полный прайс моделей.</p></noscript>
-      </div>
-    </div>
-    <div class="calc reveal" data-d="2">
-      <div class="calc__head">
-        <p class="eyebrow">Калькулятор</p>
-        <h3>Сравните сценарий за минуту</h3>
-      </div>
-      <div class="calc__controls">
-        <label class="calc__field">
-          <span class="calc__lbl">Объём текста в месяц <output id="calcTokensOut">30 млн частей</output></span>
-          <input id="calcTokens" type="range" min="1" max="200" step="1" value="30" aria-label="Объём текста в месяц, млн частей">
-        </label>
-        <label class="calc__field">
-            <span class="calc__lbl">Выберите помощника</span>
-          <select id="calcModel" aria-label="Выберите помощника"></select>
-        </label>
-      </div>
-      <div class="calc__out">
-        <div class="calc__cell"><span>Без экономии текста</span><b id="calcOther">—</b></div>
-        <div class="calc__cell"><span>С экономией текста</span><b id="calcZeus" class="calc__zeus">—</b></div>
-        <div class="calc__cell"><span>Разница за год</span><b id="calcSave" class="calc__save">—</b></div>
-      </div>
-      <p class="calc__note">Примерный расчёт для выбранного помощника. Итоговая сумма зависит от объёма вашего текста и ответа.</p>
     </div>
   </div>
 </section>
@@ -440,8 +440,8 @@
         <h4>Продукт</h4>
         <ul>
           <li><a href="#models">Модели</a></li>
-          <li><a href="#features">Возможности</a></li>
           <li><a href="#pricing">Цены</a></li>
+          <li><a href="#features">Возможности</a></li>
           <li><a href="#compare">Сравнение</a></li>
         </ul>
       </div>
