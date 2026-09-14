@@ -246,43 +246,6 @@
     targets.forEach(function (t) { sio.observe(t); });
   }
 
-  /* ---------- savings calculator ---------- */
-  var calcTokens = document.getElementById("calcTokens");
-  if (calcTokens) {
-    var calcModel = document.getElementById("calcModel");
-    var out = document.getElementById("calcTokensOut");
-    var cOther = document.getElementById("calcOther");
-    var cZeus = document.getElementById("calcZeus");
-    var cSave = document.getElementById("calcSave");
-    var COMPRESSION = 0.65;
-
-    calcModel.innerHTML = PRICE_ROWS.map(function (row) {
-      var value = row.input + "|" + row.input + "|" + row.id;
-      var label = row.id + " — ваш текст " + price(row.input) + " · ответ " + price(row.output);
-      return '<option value="' + value + '">' + label + "</option>";
-    }).join("");
-    var defaultModel = PRICE_ROWS.find(function (row) { return row.id === "claude-sonnet-5"; });
-    if (defaultModel) calcModel.value = defaultModel.input + "|" + defaultModel.input + "|" + defaultModel.id;
-
-    function rub(v) {
-      return Math.round(v).toLocaleString("ru-RU") + " ₽";
-    }
-    function recalc() {
-      var mln = parseInt(calcTokens.value, 10);
-      var parts = calcModel.value.split("|");
-      var other = mln * parseFloat(parts[0]);
-      var zeus = mln * parseFloat(parts[1]) * COMPRESSION;
-      out.textContent = mln + " млн частей";
-      cOther.innerHTML = rub(other) + '<i>/ мес</i>';
-      cZeus.innerHTML = rub(zeus) + '<i>/ мес</i>';
-      cSave.textContent = rub(Math.max(0, other - zeus) * 12);
-    }
-    calcTokens.addEventListener("input", recalc);
-    calcModel.addEventListener("change", recalc);
-    recalc();
-  }
-
-
   /* ---------- live demo playground ---------- */
   var demoForm = document.getElementById("demoForm");
   if (demoForm) {
